@@ -29,17 +29,17 @@ export default class CopyNumberEnrichmentsTab extends React.Component<ICopyNumbe
         return (
             <div>
                 <EnrichmentsDataSetDropdown dataSets={this.props.store.copyNumberEnrichmentProfiles.result!} onChange={this.onProfileChange}
-                    selectedValue={this.props.store.selectedEnrichmentCopyNumberProfile.molecularProfileId} 
+                    selectedValue={this.props.store.selectedEnrichmentCopyNumberProfile.molecularProfileId}
                     molecularProfileIdToProfiledSampleCount={this.props.store.molecularProfileIdToProfiledSampleCount.result!}/>
                 <AlterationEnrichmentContainer data={this.props.store.copyNumberHomdelEnrichmentData.result!}
-                    totalAlteredCount={this.props.store.alteredSampleKeys.result!.length}
-                    totalUnalteredCount={this.props.store.unalteredSampleKeys.result!.length}
+                    totalAlteredCount={this.props.store.alteredPatientKeys.result!.length}
+                    totalUnalteredCount={this.props.store.unalteredPatientKeys.result!.length}
                     headerName={"Deep Deletion - " + this.props.store.selectedEnrichmentCopyNumberProfile.name}
                     store={this.props.store} alterationType="a deep deletion"/>
                 <hr />
                 <AlterationEnrichmentContainer data={this.props.store.copyNumberAmpEnrichmentData.result!}
-                    totalAlteredCount={this.props.store.alteredSampleKeys.result!.length}
-                    totalUnalteredCount={this.props.store.unalteredSampleKeys.result!.length}
+                    totalAlteredCount={this.props.store.alteredPatientKeys.result!.length}
+                    totalUnalteredCount={this.props.store.unalteredPatientKeys.result!.length}
                     headerName={"Amplification - " + this.props.store.selectedEnrichmentCopyNumberProfile.name}
                     store={this.props.store} alterationType="an amplification"/>
             </div>
