@@ -827,6 +827,16 @@ export class ResultsViewPageStore {
         }
     }, []);
 
+    readonly alteredPatients = remoteData<Patient[]>({
+        await: () => [
+            this.patientKeyToPatient,
+            this.alteredPatientKeys
+        ],
+        invoke: () => {
+            return Promise.resolve(this.alteredPatientKeys.result!.map(a => this.patientKeyToPatient.result![a]));
+        }
+    }, []);
+
     readonly alteredPatientKeys = remoteData({
         await:()=>[
             this.patients,
@@ -862,6 +872,18 @@ export class ResultsViewPageStore {
             const unalteredSamples: Sample[] = [];
             this.unalteredSampleKeys.result!.forEach(a => unalteredSamples.push(this.sampleKeyToSample.result![a]));
             return Promise.resolve(unalteredSamples);
+        }
+    }, []);
+
+    readonly unalteredPatients = remoteData<Patient[]>({
+        await: () => [
+            this.patientKeyToPatient,
+            this.unalteredPatientKeys
+        ],
+        invoke: () => {
+            const unalteredPatients: Patient[] = [];
+            this.unalteredPatientKeys.result!.forEach(a => unalteredPatients.push(this.patientKeyToPatient.result![a]));
+            return Promise.resolve(unalteredPatients);
         }
     }, []);
 
@@ -2127,7 +2149,7 @@ export class ResultsViewPageStore {
             this.molecularProfileIdToProfiledSampleCount
         ],
         invoke: async () => {
-            return _.filter(this.molecularProfilesInStudies.result, (profile: MolecularProfile) => 
+            return _.filter(this.molecularProfilesInStudies.result, (profile: MolecularProfile) =>
                 profile.molecularAlterationType === AlterationTypeConstants.MUTATION_EXTENDED);
         },
         onResult:(profiles: MolecularProfile[])=>{
@@ -2137,8 +2159,8 @@ export class ResultsViewPageStore {
 
     readonly mutationEnrichmentData = remoteData<AlterationEnrichment[]>({
         await: () => [
-            this.alteredSamples,
-            this.unalteredSamples,
+            this.alteredPatients,
+            this.unalteredPatients,
             this.mutationEnrichmentProfiles,
             this.genes,
             this.selectedMolecularProfiles
@@ -2148,9 +2170,9 @@ export class ResultsViewPageStore {
             return this.selectedEnrichmentMutationProfile ? this.sortEnrichmentData(
                 await internalClient.fetchMutationEnrichmentsUsingPOST({
                     molecularProfileId: this.selectedEnrichmentMutationProfile.molecularProfileId,
-                    enrichmentType: "SAMPLE",
-                    enrichmentFilter: {alteredIds: this.alteredSamples.result.map(s => s.sampleId),
-                        unalteredIds: this.unalteredSamples.result.map(s => s.sampleId),
+                    enrichmentType: "PATIENT",
+                    enrichmentFilter: {alteredIds: this.alteredPatients.result.map(s => s.patientId),
+                        unalteredIds: this.unalteredPatients.result.map(s => s.patientId),
                         queryGenes: this.getEnrichmentsQueryGenes(this.selectedEnrichmentMutationProfile)}})) : [];
         }
     });
@@ -2160,7 +2182,7 @@ export class ResultsViewPageStore {
             this.molecularProfileIdToProfiledSampleCount
         ],
         invoke: async () => {
-            return _.filter(this.molecularProfilesInStudies.result, (profile: MolecularProfile) => 
+            return _.filter(this.molecularProfilesInStudies.result, (profile: MolecularProfile) =>
                 profile.molecularAlterationType === AlterationTypeConstants.COPY_NUMBER_ALTERATION && profile.datatype === "DISCRETE");
         },
         onResult:(profiles: MolecularProfile[])=>{
@@ -2170,16 +2192,16 @@ export class ResultsViewPageStore {
 
     readonly copyNumberHomdelEnrichmentData = remoteData<AlterationEnrichment[]>({
         await: () => [
-            this.alteredSamples,
-            this.unalteredSamples,
+            this.alteredPatients,
+            this.unalteredPatients,
             this.copyNumberEnrichmentProfiles,
             this.genes,
             this.selectedMolecularProfiles
         ],
         invoke: async () => {
             // returns an empty array if the selected study doesn't have any CNA profiles
-            return this.selectedEnrichmentCopyNumberProfile ? this.getCopyNumberEnrichmentData(this.alteredSamples.result, 
-                this.unalteredSamples.result, "HOMDEL") : [];
+            return this.selectedEnrichmentCopyNumberProfile ? this.getCopyNumberEnrichmentData(this.alteredPatients.result,
+                this.unalteredPatients.result, "HOMDEL") : [];
         }
     });
 
@@ -2193,21 +2215,21 @@ export class ResultsViewPageStore {
         ],
         invoke: async () => {
             // returns an empty array if the selected study doesn't have any CNA profiles
-            return this.selectedEnrichmentCopyNumberProfile ? this.getCopyNumberEnrichmentData(this.alteredSamples.result, 
+            return this.selectedEnrichmentCopyNumberProfile ? this.getCopyNumberEnrichmentData(this.alteredSamples.result,
                 this.unalteredSamples.result, "AMP") : [];
         }
     });
 
-    private async getCopyNumberEnrichmentData(alteredSamples: Sample[], unalteredSamples: Sample[], 
+    private async getCopyNumberEnrichmentData(alteredPatients: Patient[], unalteredPatients: Patient[],
         copyNumberEventType: "HOMDEL" | "AMP"): Promise<AlterationEnrichment[]> {
-        
+
         return this.sortEnrichmentData(await internalClient.fetchCopyNumberEnrichmentsUsingPOST({
             molecularProfileId: this.selectedEnrichmentCopyNumberProfile.molecularProfileId,
             copyNumberEventType: copyNumberEventType,
-            enrichmentType: "SAMPLE",
+            enrichmentType: "PATIENT",
             enrichmentFilter: {
-                alteredIds: alteredSamples.map(s => s.sampleId),
-                unalteredIds: unalteredSamples.map(s => s.sampleId),
+                alteredIds: alteredPatients.map(s => s.patientId),
+                unalteredIds: unalteredPatients.map(s => s.patientId),
                 queryGenes: this.getEnrichmentsQueryGenes(this.selectedEnrichmentCopyNumberProfile)
         }}));
     }
@@ -2234,8 +2256,8 @@ export class ResultsViewPageStore {
 
     readonly mRNAEnrichmentData = remoteData<ExpressionEnrichment[]>({
         await: () => [
-            this.alteredSamples,
-            this.unalteredSamples,
+            this.alteredPatients,
+            this.unalteredPatients,
             this.mRNAEnrichmentProfiles,
             this.genes,
             this.selectedMolecularProfiles
@@ -2245,9 +2267,9 @@ export class ResultsViewPageStore {
             return this.selectedEnrichmentMRNAProfile ? this.sortEnrichmentData(
                 await internalClient.fetchExpressionEnrichmentsUsingPOST({
                     molecularProfileId: this.selectedEnrichmentMRNAProfile.molecularProfileId,
-                    enrichmentType: "SAMPLE",
-                    enrichmentFilter: {alteredIds: this.alteredSamples.result.map(s => s.sampleId),
-                        unalteredIds: this.unalteredSamples.result.map(s => s.sampleId),
+                    enrichmentType: "PATIENT",
+                    enrichmentFilter: {alteredIds: this.alteredPatients.result.map(s => s.patientId),
+                        unalteredIds: this.unalteredPatients.result.map(s => s.patientId),
                         queryGenes: this.getEnrichmentsQueryGenes(this.selectedEnrichmentMRNAProfile)}})) : [];
         }
     });
@@ -2257,7 +2279,7 @@ export class ResultsViewPageStore {
             this.molecularProfileIdToProfiledSampleCount
         ],
         invoke: async () => {
-            return _.filter(this.molecularProfilesInStudies.result, (profile: MolecularProfile) => 
+            return _.filter(this.molecularProfilesInStudies.result, (profile: MolecularProfile) =>
                 profile.molecularAlterationType === AlterationTypeConstants.PROTEIN_LEVEL && profile.datatype != "Z-SCORE");
         },
         onResult:(profiles: MolecularProfile[])=>{
@@ -2267,8 +2289,8 @@ export class ResultsViewPageStore {
 
     readonly proteinEnrichmentData = remoteData<ExpressionEnrichment[]>({
         await: () => [
-            this.alteredSamples,
-            this.unalteredSamples,
+            this.alteredPatients,
+            this.unalteredPatients,
             this.proteinEnrichmentProfiles,
             this.genes,
             this.selectedMolecularProfiles
@@ -2278,9 +2300,9 @@ export class ResultsViewPageStore {
             return this.selectedEnrichmentProteinProfile ? this.sortEnrichmentData(
                 await internalClient.fetchExpressionEnrichmentsUsingPOST({
                     molecularProfileId: this.selectedEnrichmentProteinProfile.molecularProfileId,
-                    enrichmentType: "SAMPLE",
-                    enrichmentFilter: {alteredIds: this.alteredSamples.result.map(s => s.sampleId),
-                        unalteredIds: this.unalteredSamples.result.map(s => s.sampleId),
+                    enrichmentType: "PATIENT",
+                    enrichmentFilter: {alteredIds: this.alteredPatients.result.map(s => s.patientId),
+                        unalteredIds: this.unalteredPatients.result.map(s => s.patientId),
                         queryGenes: this.getEnrichmentsQueryGenes(this.selectedEnrichmentProteinProfile)}})) : [];
         }
     });
