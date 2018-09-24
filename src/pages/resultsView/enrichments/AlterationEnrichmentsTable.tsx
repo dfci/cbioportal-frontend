@@ -83,8 +83,8 @@ export default class AlterationEnrichmentTable extends React.Component<IAlterati
 
         columns[AlterationEnrichmentTableColumnType.GENE] = {
             name: "Gene",
-            render: (d: AlterationEnrichmentRow) => <div style={{ display: 'flex' }}><Checkbox checked={d.checked} 
-                disabled={d.disabled} key={d.hugoGeneSymbol} className={styles.Checkbox} 
+            render: (d: AlterationEnrichmentRow) => <div style={{ display: 'flex' }}><Checkbox checked={d.checked}
+                disabled={d.disabled} key={d.hugoGeneSymbol} className={styles.Checkbox}
                 onChange={() => this.checkboxChange(d.hugoGeneSymbol)} title={d.disabled ? "This is one of the query genes" : ""} />
                 <span className={styles.GeneName}><b>{d.hugoGeneSymbol}</b></span></div>,
             tooltip: <span>Gene</span>,
@@ -104,20 +104,20 @@ export default class AlterationEnrichmentTable extends React.Component<IAlterati
         };
 
         columns[AlterationEnrichmentTableColumnType.PERCENTAGE_IN_ALTERED] = {
-            name: "Samples with alteration in altered group",
+            name: "Patients with alteration in altered group",
             render: (d: AlterationEnrichmentRow) => <span>{formatPercentage(d.alteredCount, d.alteredPercentage)}</span>,
             headerRender: (name: string) => <span style={{ display: 'inline-block', width: 100 }}>{name}</span>,
-            tooltip: <span>Number (percentage) of samples that have alterations in the query gene(s) that also 
+            tooltip: <span>Number (percentage) of patients that have alterations in the query gene(s) that also
                 have {this.props.alterationType} in the listed gene.</span>,
             sortBy: (d: AlterationEnrichmentRow) => d.alteredCount,
             download: (d: AlterationEnrichmentRow) => formatPercentage(d.alteredCount, d.alteredPercentage)
         };
 
         columns[AlterationEnrichmentTableColumnType.PERCENTAGE_IN_UNALTERED] = {
-            name: "Samples with alteration in unaltered group",
+            name: "Patients with alteration in unaltered group",
             render: (d: AlterationEnrichmentRow) => <span>{formatPercentage(d.unalteredCount, d.unalteredPercentage)}</span>,
             headerRender: (name: string) => <span style={{ display: 'inline-block', width: 100 }}>{name}</span>,
-            tooltip: <span>Number (percentage) of samples that do not have alterations in the query gene(s) that 
+            tooltip: <span>Number (percentage) of patients that do not have alterations in the query gene(s) that
                 have {this.props.alterationType} in the listed gene.</span>,
             sortBy: (d: AlterationEnrichmentRow) => d.unalteredCount,
             download: (d: AlterationEnrichmentRow) => formatPercentage(d.unalteredCount, d.unalteredPercentage)
@@ -153,7 +153,7 @@ export default class AlterationEnrichmentTable extends React.Component<IAlterati
                 {d.qValue < 0.05 ? <Badge style={{
                     backgroundColor: '#58ACFA', fontSize: 8, marginBottom: 2
                 }}>Significant</Badge> : ""}</div>,
-            tooltip: 
+            tooltip:
                 <table>
                     <tr>
                         <td>Log ratio > 0</td>
@@ -181,7 +181,7 @@ export default class AlterationEnrichmentTable extends React.Component<IAlterati
         const orderedColumns = _.sortBy(this._columns, (c: AlterationEnrichmentTableColumn) => c.order);
         return (
             <AlterationEnrichmentTableComponent initialItemsPerPage={20} paginationProps={{ itemsPerPageOptions: [20] }}
-                columns={orderedColumns} data={this.props.data} initialSortColumn={this.props.initialSortColumn} 
+                columns={orderedColumns} data={this.props.data} initialSortColumn={this.props.initialSortColumn}
                 onRowClick={this.onRowClick} dataStore={this.props.dataStore}/>
         );
     }
