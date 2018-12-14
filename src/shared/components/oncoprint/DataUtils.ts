@@ -56,7 +56,7 @@ const protRenderPriority = {
 
 export type OncoprintMutationType = "missense" | "inframe" | "fusion" | "promoter" | "trunc";
 
-export function getOncoprintMutationType(d:Mutation):OncoprintMutationType {
+export function getOncoprintMutationType(d:Pick<Mutation, "proteinChange"|"mutationType">):OncoprintMutationType {
     if ((d.proteinChange || "").toLowerCase() === "promoter") {
         // promoter mutations aren't labeled as such in mutationType, but in proteinChange, so we must detect it there
         return "promoter";
@@ -352,21 +352,27 @@ export function fillClinicalTrackDatum(
         fillNoDataValue(trackDatum, attribute);
     } else {
         if (attribute.datatype.toLowerCase() === "number") {
-            let numValCount = 0;
-            let numValSum = 0;
+            let values = [];
             for (const x of data) {
                 const newVal = parseFloat((x as ClinicalData).value+"");
                 if (!isNaN(newVal)) {
-                    numValCount += 1;
-                    numValSum += newVal;
+                    values.push(newVal);
                 }
             }
-            if (numValCount === 0) {
+            if (values.length === 0) {
                 fillNoDataValue(trackDatum, attribute);
             } else {
-                // average
-                trackDatum.attr_val = numValSum / numValCount;
-                trackDatum.attr_val_counts[trackDatum.attr_val] = 1;
+                switch (attribute.clinicalAttributeId) {
+                    case "MUTATION_COUNT":
+                        // max
+                        trackDatum.attr_val = values.reduce((max, nextVal)=>Math.max(max, nextVal), Number.NEGATIVE_INFINITY);
+                        break;
+                    default:
+                        // average
+                        trackDatum.attr_val = values.reduce((sum, nextVal)=>sum+nextVal, 0) / values.length;
+                        break;
+                }
+                trackDatum.attr_val_counts[trackDatum.attr_val!] = 1;
             }
         } else if (attribute.datatype.toLowerCase() === "string") {
             const attr_val_counts = trackDatum.attr_val_counts;
