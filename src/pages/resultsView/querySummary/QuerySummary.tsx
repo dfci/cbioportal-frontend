@@ -99,7 +99,7 @@ export default class QuerySummary extends React.Component<{ routingStore:Extende
             const loadingComplete = this.props.store.totalAlterationStats.isComplete && this.props.store.queriedStudies.isComplete && this.props.store.samples.isComplete;
 
             let alterationPercentage = (loadingComplete) ?
-                (this.props.store.totalAlterationStats.result!.alteredSampleCount / this.props.store.totalAlterationStats.result!.sampleCount * 100) : 0;
+                (this.props.store.alteredPatientKeys.result!.length / (this.props.store.alteredPatientKeys.result!.length + this.props.store.unalteredPatientKeys.result!.length) * 100) : 0;
 
             return (
                 <div>
@@ -123,7 +123,7 @@ export default class QuerySummary extends React.Component<{ routingStore:Extende
                                 (loadingComplete) && (
                                     <div className="query-summary__alterationData">
                                         <strong>Gene Set / Pathway is altered
-                                            in {this.props.store.totalAlterationStats.result!.alteredSampleCount} ({_.round(alterationPercentage, 1)}%) of queried samples</strong>
+                                            in {this.props.store.alteredPatientKeys.result!.length} ({_.round(alterationPercentage, 1)}%) of queried patients</strong>
                                     </div>
                                 )
                             }
