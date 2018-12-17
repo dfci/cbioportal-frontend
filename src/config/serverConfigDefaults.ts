@@ -3,7 +3,7 @@ import {IServerConfig} from "./IAppConfig";
 const ServerConfigDefaults: Partial<IServerConfig> = {
     app_version:"1.0",
     civic_url:"https://civicdb.org/api/",
-    disabled_tabs:"",
+    disabled_tabs:"bookmark|network",
     genomenexus_url:"v1.genomenexus.org",
     mycancergenome_show:false,
     oncoprint_oncokb_hotspots_default:undefined,
@@ -51,16 +51,7 @@ const ServerConfigDefaults: Partial<IServerConfig> = {
     skin_data_sets_header:`The portal currently contains data from the following 
             cancer genomics studies.  The table below lists the number of available samples per data type and tumor.`,
 
-    skin_example_study_queries: `tcga pancancer atlas\n
-                                     tcga provisional\n
-                                     tcga -provisional -pancancer\n
-                                     tcga or icgc\n
-                                     msk-impact\n
-                                     -\"cell line\"\n
-                                     breast\n
-                                     esophageal OR stomach\n
-                                     prostate msk\n
-                                     serous`,
+    skin_example_study_queries: ``,
 
     skin_login_contact_html: `If you think you have received this message in
             error, please contact us at <a style="color:#FF0000" href="mailto:cbioportal-access@cbio.mskcc.org">

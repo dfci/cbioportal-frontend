@@ -15,6 +15,7 @@ export default class PortalHeader extends React.Component<{ appStore:AppStore },
 
         return [
 
+
             {
                 id:"datasets",
                 text:"Data Sets",
@@ -23,6 +24,14 @@ export default class PortalHeader extends React.Component<{ appStore:AppStore },
                 hide:()=>AppConfig.serverConfig.skin_show_data_tab === false
             },
 
+            {
+                id:"download_profile_data",
+                text:"Download Profile Data",
+                address:"/download_profile_data.jsp",
+                internal:true,
+                hide:()=> false
+
+            },
             {
                 id:"webAPI",
                 text:"Web API",
