@@ -2751,7 +2751,7 @@ export class ResultsViewPageStore {
             enrichmentType: "PATIENT",
             enrichmentFilter: {
                 alteredIds: this.alteredPatients.result.map(p => p.patientId),
-                unalteredIds: this.unalteredSamples.result.map(p => p.patientId),
+                unalteredIds: this.unalteredPatients.result.map(p => p.patientId),
             }
         })
     });
