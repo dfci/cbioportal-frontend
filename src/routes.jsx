@@ -31,13 +31,13 @@ import Visualize from 'bundle-loader?lazy!babel-loader!./pages/staticPages/visua
 import AboutUs from 'bundle-loader?lazy!babel-loader!./pages/staticPages/aboutus/AboutUs';
 import News from 'bundle-loader?lazy!babel-loader!./pages/staticPages/news/News';
 import FAQ from 'bundle-loader?lazy!babel-loader!./pages/staticPages/faq/FAQ';
+import downloadProfileData from 'bundle-loader?lazy?!babel-loader!./pages/staticPages/downloadProfileData/downloadProfileData';
 import OQL from 'bundle-loader?lazy!babel-loader!./pages/staticPages/oql/OQL';
 
 
 import {getBasePath} from "shared/api/urls";
 import $ from "jquery";
 import ExtendedRouterStore from "shared/lib/ExtendedRouterStore";
-import downloadProfileData from 'pages/staticPages/downloadProfileData/downloadProfileData';
 
 // accepts bundle-loader's deferred loader function and defers execution of route's render
 // until chunk is loaded
