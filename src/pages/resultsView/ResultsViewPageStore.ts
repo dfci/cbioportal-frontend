@@ -2681,7 +2681,7 @@ export class ResultsViewPageStore {
     readonly copyNumberAmpEnrichmentData = makeEnrichmentDataPromise({
         await: () => [
             this.alteredPatients,
-            this.unalteredPatients
+            this.unalteredPatients,
             this.copyNumberEnrichmentProfiles,
             this.genes,
             this.selectedMolecularProfiles
