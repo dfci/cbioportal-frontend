@@ -195,7 +195,7 @@ export default class RightBar extends React.Component<IRightBarProps, IRightBarS
             <div>
                 { this.getWhatsNew() }
                 { this.getDataSetsSection() }
-                { this.getExampleSection() }
+                { /* this.getExampleSection() */ }
                 { this.getTestimonialsSection() }
             </div>
         );
