@@ -31,7 +31,7 @@ import Visualize from 'bundle-loader?lazy!babel-loader!./pages/staticPages/visua
 import AboutUs from 'bundle-loader?lazy!babel-loader!./pages/staticPages/aboutus/AboutUs';
 import News from 'bundle-loader?lazy!babel-loader!./pages/staticPages/news/News';
 import FAQ from 'bundle-loader?lazy!babel-loader!./pages/staticPages/faq/FAQ';
-import downloadProfileData from 'bundle-loader?lazy?!babel-loader!./pages/staticPages/downloadProfileData/downloadProfileData';
+import DownloadProfileData from 'bundle-loader?lazy!babel-loader!./pages/staticPages/downloadProfileData/DownloadProfileData';
 import OQL from 'bundle-loader?lazy!babel-loader!./pages/staticPages/oql/OQL';
 
 
@@ -86,7 +86,7 @@ export const makeRoutes = (routing) => {
                 <Route path="/oncoprinter" getComponent={lazyLoadComponent(OncoprinterTool)} />
 
                 <Route path="/webAPI" onEnter={()=>{$(document).scrollTop(0)}} getComponent={lazyLoadComponent(WebAPIPage)} />
-                <Route path="/downloadProfileData" onEnter={()=>{$(document).scrollTop(0)}} getComponent={lazyLoadComponent(downloadProfileData)} />
+                <Route path="/downloadProfileData" onEnter={()=>{$(document).scrollTop(0)}} getComponent={lazyLoadComponent(DownloadProfileData)} />
                 <Route path="/rmatlab" onEnter={()=>{$(document).scrollTop(0)}} getComponent={lazyLoadComponent(RMATLAB)} />
                 <Route path="/datasets" onEnter={()=>{$(document).scrollTop(0)}} getComponent={lazyLoadComponent(DatasetPage)} />
                 <Route path="/tutorials" onEnter={()=>{$(document).scrollTop(0)}} getComponent={lazyLoadComponent(Tutorials)} />

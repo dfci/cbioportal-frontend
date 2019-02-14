@@ -26,7 +26,7 @@ export default class PortalHeader extends React.Component<{ appStore:AppStore },
             {
                 id:"download_profile_data",
                 text:"Download Profile Data",
-                address:"/downloadProfileData",
+                address:"/DownloadProfileData",
                 internal:true,
                 hide:()=> false
 
