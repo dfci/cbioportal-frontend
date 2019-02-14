@@ -37,6 +37,7 @@ import OQL from 'bundle-loader?lazy!babel-loader!./pages/staticPages/oql/OQL';
 import {getBasePath} from "shared/api/urls";
 import $ from "jquery";
 import ExtendedRouterStore from "shared/lib/ExtendedRouterStore";
+import downloadProfileData from 'pages/staticPages/downloadProfileData/downloadProfileData';
 
 // accepts bundle-loader's deferred loader function and defers execution of route's render
 // until chunk is loaded
@@ -85,6 +86,7 @@ export const makeRoutes = (routing) => {
                 <Route path="/oncoprinter" getComponent={lazyLoadComponent(OncoprinterTool)} />
 
                 <Route path="/webAPI" onEnter={()=>{$(document).scrollTop(0)}} getComponent={lazyLoadComponent(WebAPIPage)} />
+                <Route path="/downloadProfileData" onEnter={()=>{$(document).scrollTop(0)}} getComponent={lazyLoadComponent(downloadProfileData)} />
                 <Route path="/rmatlab" onEnter={()=>{$(document).scrollTop(0)}} getComponent={lazyLoadComponent(RMATLAB)} />
                 <Route path="/datasets" onEnter={()=>{$(document).scrollTop(0)}} getComponent={lazyLoadComponent(DatasetPage)} />
                 <Route path="/tutorials" onEnter={()=>{$(document).scrollTop(0)}} getComponent={lazyLoadComponent(Tutorials)} />
