@@ -333,6 +333,7 @@ export default class ResultsViewPage extends React.Component<IResultsViewPagePro
             {
                 id:ResultsViewTab.NETWORK,
                 hide:()=>{
+                    return true;
                     if (!this.resultsViewPageStore.studies.isComplete) {
                         return true;
                     } else {
