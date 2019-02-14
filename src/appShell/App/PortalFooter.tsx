@@ -25,9 +25,9 @@ import {observer} from "mobx-react";
             }
             if (AppConfig.serverConfig.skin_footer && !_.isEmpty(AppConfig.serverConfig.skin_footer)) {
                 return (
-                    <div id="footer" dangerouslySetInnerHTML={{__html: 
+                    <div id="footer" dangerouslySetInnerHTML={{__html:
                         "<a href='http://www.cbioportal.org'>cBioPortal</a> | " +
-                        `<a href='${AppConfig.apiRoot}api/info'>${version}</a> ` +
+                        `<a href='${AppConfig.apiRoot}api/info'>2.0.1</a> ` +
                         AppConfig.serverConfig.skin_footer +
                         "<br />" +
                         `Questions and Feedback: <a href="mailto:${AppConfig.serverConfig.skin_email_contact}">${AppConfig.serverConfig.skin_email_contact}</a>`
