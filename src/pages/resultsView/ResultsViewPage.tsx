@@ -424,7 +424,7 @@ export default class ResultsViewPage extends React.Component<IResultsViewPagePro
 
     @autobind
     public evaluateTabInclusion(tab:ITabConfiguration){
-        const excludedTabs = AppConfig.serverConfig.disabled_tabs || "";
+        const excludedTabs = "network,bookmark,IGV";// AppConfig.serverConfig.disabled_tabs || "";
         const isExcludedInList = parseConfigDisabledTabs(excludedTabs).includes(tab.id);
         const isRoutedTo = (this.resultsViewPageStore.tabId === tab.id);
         const isExcluded = (tab.hide) ? tab.hide() : false;
