@@ -83,6 +83,7 @@ export class BookmarkModal extends React.Component<{ onHide: () => void, urlProm
     render() {
 
         //NOTE: internal div id necessary for
+        // @ts-ignore
         return <Modal show={true} onHide={this.props.onHide}>
             <Modal.Header closeButton>
                 <Modal.Title>Bookmark Query</Modal.Title>
@@ -94,7 +95,7 @@ export class BookmarkModal extends React.Component<{ onHide: () => void, urlProm
                             <div className="form-group">
                                 <label htmlFor="exampleInputAmount">Share link</label>
                                 <div className="input-group">
-                                    <input type="text" className="form-control" value={this.urlData ? this.urlData.sessionUrl.replace(".edu/", ".edu:8443/") : ""}/>
+                                    <input type="text" className="form-control" value={this.urlData && this.urlData.sessionUrl ? this.urlData.sessionUrl.replace(".edu/", ".edu:8443/") : ""}/>
                                     <div className="input-group-addon">
                                         <a ref={(el:HTMLAnchorElement)=>this.sessionButton=el}
                                             onClick={this.showThumb}
