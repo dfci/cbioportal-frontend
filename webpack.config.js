@@ -117,7 +117,7 @@ var config = {
 
     plugins: [
         new webpack.DefinePlugin({
-            'VERSION': version, 
+            'VERSION': version,
             'COMMIT': commit,
             'IS_DEV_MODE': isDev,
             'ENV_CBIOPORTAL_URL': isDev && process.env.CBIOPORTAL_URL? JSON.stringify(cleanUrl(process.env.CBIOPORTAL_URL)) : '"replace_me_env_cbioportal_url"',
@@ -281,7 +281,7 @@ var config = {
         quiet:false,
         lazy:false,
         publicPath:'/',
-        https:false,
+        https:true,
         host:'localhost',
         headers: {"Access-Control-Allow-Origin": "*"},
         stats:'errors-only'
