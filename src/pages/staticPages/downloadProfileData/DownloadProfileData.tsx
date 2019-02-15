@@ -20,27 +20,8 @@ export default class DownloadProfileData extends React.Component<{}, State> {
             checkBox3: false,
             buttonDisabled: true
         };
-        this.handleCheck1 = this.handleCheck1.bind(this);
-        this.handleCheck2 = this.handleCheck2.bind(this);
-        this.handleCheck3 = this.handleCheck3.bind(this);
-        this.handleButton = this.handleButton.bind(this);
     }
 
-    handleButton() {
-        this.setState({buttonDisabled: !(this.state.checkBox1 && this.state.checkBox2 && this.state.checkBox3)});
-    }
-
-    handleCheck1(val: boolean) {
-        this.setState({checkBox1: val});
-    }
-
-    handleCheck2(val: boolean) {
-        this.setState({checkBox2: val});
-    }
-
-    handleCheck3(val: boolean) {
-        this.setState({checkBox3: val});
-    }
 
     public render() {
 
@@ -73,11 +54,16 @@ export default class DownloadProfileData extends React.Component<{}, State> {
                         fontSize: '18px !important'
                     }}>For example, you agree not to download data from the portal and make it available on a DFCI web
                         server, or email the data file to a colleague outside of DFCI, BWH or BCH.</p>
-                    <input type="radio" onChange={() => this.setState({checkBox1: true})} checked={this.state.checkBox1}
+                    <input type="radio" onChange={() => this.setState({
+                        checkBox1: true
+                    })} checked={this.state.checkBox1}
                            style={{marginLeft: '5px'}}/> <label
                     style={{fontSize: '14px'}}>Agree</label><br/>
-                    <input type="radio" onChange={() => this.setState({checkBox1: false})}
-                           checked={!this.state.checkBox1} style={{marginLeft: '5px'}}/> <label
+                    <input type="radio" onChange={() => this.setState({
+                        checkBox1: false
+                    })}
+                           checked={!this.state.checkBox1}
+                           style={{marginLeft: '5px'}}/> <label
                     style={{fontSize: '14px'}}>Disagree</label><br/><br/>
                     <p style={{
                         fontFamily: '"Roboto", sans-serif',
@@ -94,10 +80,14 @@ export default class DownloadProfileData extends React.Component<{}, State> {
                         fontSize: '18px !important'
                     }}>For example, you agree not to use some combination of genomic data plus de-identified clinical
                         data to re-identify a patient.</p>
-                    <input type="radio" onChange={() => this.setState({checkBox2: true})} checked={this.state.checkBox2}
+                    <input type="radio" onChange={() => this.setState({
+                        checkBox2: true
+                    })} checked={this.state.checkBox2}
                            style={{marginLeft: '5px'}}/> <label
                     style={{fontSize: '14px'}}>Agree</label><br/>
-                    <input type="radio" onChange={() => this.setState({checkBox2: false})}
+                    <input type="radio" onChange={() => this.setState({
+                        checkBox2: false
+                    })}
                            checked={!this.state.checkBox2} style={{marginLeft: '5px'}}/> <label
                     style={{fontSize: '14px'}}>Disagree</label><br/><br/>
                     <p style={{
@@ -115,24 +105,28 @@ export default class DownloadProfileData extends React.Component<{}, State> {
                         lineHeight: '22px',
                         fontSize: '18px !important'
                     }}>This is required by the Profile Project, DFCI IRB protocol 11-104.</p>
-                    <input type="radio" onChange={() => this.setState({checkBox3: true})} checked={this.state.checkBox3}
+                    <input type="radio" onChange={() => this.setState({
+                        checkBox3: true
+                    })} checked={this.state.checkBox3}
                            style={{marginLeft: '5px'}}/> <label
                     style={{fontSize: '14px'}}>Agree</label><br/>
-                    <input type="radio" onChange={() => this.setState({checkBox3: false})}
-                           checked={this.state.checkBox3}
+                    <input type="radio" onChange={() => this.setState({
+                        checkBox3: false
+                    })}
+                           checked={!this.state.checkBox3}
                            style={{marginLeft: '5px'}}/> <label
                     style={{fontSize: '14px'}}>Disagree</label><br/><br/>
                     <form action="profile_latest.tar.gz">
-                        <button type="submit" id="button" disabled={this.state.buttonDisabled}
+                        <button type="submit" id="button" disabled={!(this.state.checkBox1 && this.state.checkBox2 && this.state.checkBox3)}
                                 style={{
-                                        width: '150px',
-                                        height: '50px',
-                                        borderRadius: '5px',
-                                        backgroundColor: this.state.buttonDisabled ? 'grey' : '#228B22',
-                                        borderColor: this.state.buttonDisabled ? 'grey' : '#228B22',
-                                        color: 'white',
-                                        borderStyle: 'hidden'
-                                    }}>Download
+                                    width: '150px',
+                                    height: '50px',
+                                    borderRadius: '5px',
+                                    backgroundColor: !(this.state.checkBox1 && this.state.checkBox2 && this.state.checkBox3) ? 'grey' : '#228B22',
+                                    borderColor: !(this.state.checkBox1 && this.state.checkBox2 && this.state.checkBox3) ? 'grey' : '#228B22',
+                                    color: 'white',
+                                    borderStyle: 'hidden'
+                                }}>Download
                         </button>
                     </form>
                 </div>
