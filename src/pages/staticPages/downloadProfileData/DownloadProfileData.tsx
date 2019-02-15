@@ -6,8 +6,7 @@ import {PageLayout} from "shared/components/PageLayout/PageLayout";
 type State = {
     checkBox1: boolean,
     checkBox2: boolean,
-    checkBox3: boolean,
-    buttonDisabled: boolean
+    checkBox3: boolean
 };
 
 @observer
@@ -17,8 +16,7 @@ export default class DownloadProfileData extends React.Component<{}, State> {
         this.state = {
             checkBox1: false,
             checkBox2: false,
-            checkBox3: false,
-            buttonDisabled: true
+            checkBox3: false
         };
     }
 
