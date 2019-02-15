@@ -53,7 +53,7 @@ export class BookmarkModal extends React.Component<{ onHide: () => void, urlProm
     initializeClipboards(){
             this.clipboards.push(new Clipboard(this.sessionButton, {
                 text: function() {
-                    return this.urlData.sessionUrl || this.urlData.fullUrl;
+                    return this.urlData.sessionUrl.replace(".edu/", ".edu:8443/") || this.urlData.fullUrl;
                 }.bind(this),
                 container: this.container
             }));
