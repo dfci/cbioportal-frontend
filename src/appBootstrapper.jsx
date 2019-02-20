@@ -36,7 +36,7 @@ import getBrowserWindow from "shared/lib/getBrowserWindow";
 import {getConfigurationServiceApiUrl} from "shared/api/urls";
 import {AppStore} from "./AppStore";
 
-superagentCache(superagent);
+//superagentCache(superagent);
 
 // YOU MUST RUN THESE initialize and then set the public path after
 initializeConfiguration();
