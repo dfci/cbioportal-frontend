@@ -1166,7 +1166,7 @@ export class ResultsViewPageStore {
             this.alteredPatientKeys
         ],
         invoke: () => {
-            return Promise.resolve(this.alteredPatientKeys.result!.map(a => this.alteredPatientKeys.result![a]));
+            return Promise.resolve(this.alteredPatientKeys.result!.map(a => this.patientKeyToPatient.result![a]));
         }
     }, []);
 
