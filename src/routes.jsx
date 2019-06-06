@@ -31,6 +31,7 @@ import AboutUs from 'bundle-loader?lazy!babel-loader!./pages/staticPages/aboutus
 import News from 'bundle-loader?lazy!babel-loader!./pages/staticPages/news/News';
 import FAQ from 'bundle-loader?lazy!babel-loader!./pages/staticPages/faq/FAQ';
 import OQL from 'bundle-loader?lazy!babel-loader!./pages/staticPages/oql/OQL';
+import DownloadProfileData from 'bundle-loader?lazy!babel-loader!./pages/staticPages/downloadProfileData/DownloadProfileData';
 
 import AppConfig from "appConfig";
 
@@ -103,6 +104,7 @@ export const makeRoutes = (routing) => {
                 <Route path="/oncoprinter" getComponent={lazyLoadComponent(OncoprinterTool)} />
 
                 <Route path="/webAPI" onEnter={()=>{$(document).scrollTop(0)}} getComponent={lazyLoadComponent(WebAPIPage)} />
+                <Route path="/downloadProfileData" onEnter={()=>{$(document).scrollTop(0)}} getComponent={lazyLoadComponent(DownloadProfileData)} />
                 <Route path="/rmatlab" onEnter={()=>{$(document).scrollTop(0)}} getComponent={lazyLoadComponent(RMATLAB)} />
                 <Route path="/datasets" onEnter={()=>{$(document).scrollTop(0)}} getComponent={lazyLoadComponent(DatasetPage)} />
                 <Route path="/tutorials" onEnter={handleEnter} getComponent={lazyLoadComponent(Tutorials)} />

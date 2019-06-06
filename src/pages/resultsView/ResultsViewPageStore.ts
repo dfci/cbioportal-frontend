@@ -18,6 +18,7 @@ import {
     MutationFilter,
     MutationMultipleStudyFilter,
     NumericGeneMolecularData,
+    Patient,
     PatientFilter,
     PatientIdentifier,
     Sample,
@@ -1159,6 +1160,16 @@ export class ResultsViewPageStore {
         }
     }, []);
 
+    readonly alteredPatients = remoteData<Sample[]>({
+        await: () => [
+            this.patientKeyToPatient,
+            this.alteredPatientKeys
+        ],
+        invoke: () => {
+            return Promise.resolve(this.alteredPatientKeys.result!.map(a => this.alteredPatientKeys.result![a]));
+        }
+    }, []);
+
     readonly alteredPatientKeys = remoteData({
         await:()=>[
             this.patients,
@@ -1194,6 +1205,18 @@ export class ResultsViewPageStore {
             const unalteredSamples: Sample[] = [];
             this.unalteredSampleKeys.result!.forEach(a => unalteredSamples.push(this.sampleKeyToSample.result![a]));
             return Promise.resolve(unalteredSamples);
+        }
+    }, []);
+
+    readonly unalteredPatients = remoteData<Patient[]>({
+        await: () => [
+            this.patientKeyToPatient,
+            this.unalteredPatientKeys
+        ],
+        invoke: () => {
+            const unalteredPatients: Patient[] = [];
+            this.unalteredPatientKeys.result!.forEach(a => unalteredPatients.push(this.patientKeyToPatient.result![a]));
+            return Promise.resolve(unalteredPatients);
         }
     }, []);
 
@@ -2685,16 +2708,16 @@ export class ResultsViewPageStore {
     readonly mutationEnrichmentData = makeEnrichmentDataPromise({
         store:this,
         await: () => [
-            this.alteredSamples,
-            this.unalteredSamples
+            this.alteredPatients,
+            this.unalteredPatients
         ],
         getSelectedProfile:()=>this.selectedEnrichmentMutationProfile,
         fetchData:()=>internalClient.fetchMutationEnrichmentsUsingPOST({
             molecularProfileId: this.selectedEnrichmentMutationProfile.molecularProfileId,
-            enrichmentType: "SAMPLE",
+            enrichmentType: "PATIENT",
             enrichmentFilter: {
-                alteredIds: this.alteredSamples.result.map(s => s.sampleId),
-                unalteredIds: this.unalteredSamples.result.map(s => s.sampleId),
+                alteredIds: this.alteredPatients.result.map(p => p.patientId),
+                unalteredIds: this.unalteredPatients.result.map(p => p.patientId),
             }
         })
     });
@@ -2712,36 +2735,36 @@ export class ResultsViewPageStore {
     readonly copyNumberHomdelEnrichmentData = makeEnrichmentDataPromise({
         store:this,
         await: () => [
-            this.alteredSamples,
-            this.unalteredSamples
+            this.alteredPatients,
+            this.unalteredPatients
         ],
         getSelectedProfile:()=>this.selectedEnrichmentCopyNumberProfile,
-        fetchData:()=>this.getCopyNumberEnrichmentData(this.alteredSamples.result,
-                            this.unalteredSamples.result, "HOMDEL")
+        fetchData:()=>this.getCopyNumberEnrichmentData(this.alteredPatients.result,
+                            this.unalteredPatients.result, "HOMDEL")
         }
     );
 
     readonly copyNumberAmpEnrichmentData = makeEnrichmentDataPromise({
         store:this,
         await: () => [
-            this.alteredSamples,
-            this.unalteredSamples
+            this.alteredPatients,
+            this.unalteredPatients
         ],
         getSelectedProfile:()=>this.selectedEnrichmentCopyNumberProfile,
-        fetchData:()=>this.getCopyNumberEnrichmentData(this.alteredSamples.result,
-            this.unalteredSamples.result, "AMP")
+        fetchData:()=>this.getCopyNumberEnrichmentData(this.alteredPatients.result,
+            this.unalteredPatients.result, "AMP")
     });
 
-    private getCopyNumberEnrichmentData(alteredSamples: Sample[], unalteredSamples: Sample[],
+    private getCopyNumberEnrichmentData(alteredPatients: Patient[], unalteredPatients: Patient[],
         copyNumberEventType: "HOMDEL" | "AMP"): Promise<AlterationEnrichment[]> {
-        
+
         return internalClient.fetchCopyNumberEnrichmentsUsingPOST({
             molecularProfileId: this.selectedEnrichmentCopyNumberProfile.molecularProfileId,
             copyNumberEventType: copyNumberEventType,
-            enrichmentType: "SAMPLE",
+            enrichmentType: "PATIENT",
             enrichmentFilter: {
-                alteredIds: alteredSamples.map(s => s.sampleId),
-                unalteredIds: unalteredSamples.map(s => s.sampleId),
+                alteredIds: alteredPatients.map(p => p.patientId),
+                unalteredIds: unalteredPatients.map(p => p.patientId),
             }
         });
     }
@@ -2759,16 +2782,16 @@ export class ResultsViewPageStore {
     readonly mRNAEnrichmentData = makeEnrichmentDataPromise({
         store:this,
         await: () => [
-            this.alteredSamples,
-            this.unalteredSamples
+            this.alteredPatients,
+            this.unalteredPatients
         ],
         getSelectedProfile:()=>this.selectedEnrichmentMRNAProfile,// returns an empty array if the selected study doesn't have any mRNA profiles
         fetchData:()=>internalClient.fetchExpressionEnrichmentsUsingPOST({
             molecularProfileId: this.selectedEnrichmentMRNAProfile.molecularProfileId,
-            enrichmentType: "SAMPLE",
+            enrichmentType: "PATIENT",
             enrichmentFilter: {
-                alteredIds: this.alteredSamples.result.map(s => s.sampleId),
-                unalteredIds: this.unalteredSamples.result.map(s => s.sampleId),
+                alteredIds: this.alteredPatients.result.map(p => p.patientId),
+                unalteredIds: this.unalteredPatients.result.map(p => p.patientId),
             }
         })
     });
@@ -2786,16 +2809,16 @@ export class ResultsViewPageStore {
     readonly proteinEnrichmentData = makeEnrichmentDataPromise({
         store:this,
         await: () => [
-            this.alteredSamples,
-            this.unalteredSamples
+            this.alteredPatients,
+            this.unalteredPatients
         ],
         getSelectedProfile:()=>this.selectedEnrichmentProteinProfile, // returns an empty array if the selected study doesn't have any protein profiles
         fetchData:()=>internalClient.fetchExpressionEnrichmentsUsingPOST({
             molecularProfileId: this.selectedEnrichmentProteinProfile.molecularProfileId,
-            enrichmentType: "SAMPLE",
+            enrichmentType: "PATIENT",
             enrichmentFilter: {
-                alteredIds: this.alteredSamples.result.map(s => s.sampleId),
-                unalteredIds: this.unalteredSamples.result.map(s => s.sampleId),
+                alteredIds: this.alteredPatients.result.map(p => p.patientId),
+                unalteredIds: this.unalteredPatients.result.map(p => p.patientId),
             }
         })
     });

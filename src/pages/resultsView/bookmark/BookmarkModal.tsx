@@ -49,7 +49,7 @@ export class BookmarkModal extends React.Component<{ onHide: () => void, urlProm
     initializeClipboards(){
             this.clipboards.push(new Clipboard(this.sessionButton, {
                 text: function() {
-                    return this.urlData.sessionUrl || this.urlData.fullUrl;
+                    return (this.urlData.sessionUrl || this.urlData.fullUrl).replace(".edu/", ".edu:8443/");
                 }.bind(this),
                 container: this.container
             }));
@@ -90,7 +90,7 @@ export class BookmarkModal extends React.Component<{ onHide: () => void, urlProm
                             <div className="form-group">
                                 <label htmlFor="exampleInputAmount">Share link</label>
                                 <div className="input-group">
-                                    <input type="text" className="form-control" value={(this.urlData ? this.urlData.sessionUrl : "")}/>
+                                    <input type="text" className="form-control" value={this.urlData ? this.urlData.sessionUrl.replace(".edu/", ".edu:8443/") : ""}/>
                                     <div className="input-group-addon">
                                         <a ref={(el:HTMLAnchorElement)=>this.sessionButton=el}
                                             onClick={this.showThumb}
