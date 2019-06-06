@@ -1160,7 +1160,7 @@ export class ResultsViewPageStore {
         }
     }, []);
 
-    readonly alteredPatients = remoteData<Sample[]>({
+    readonly alteredPatients = remoteData<Patient[]>({
         await: () => [
             this.patientKeyToPatient,
             this.alteredPatientKeys
@@ -2751,7 +2751,8 @@ export class ResultsViewPageStore {
             this.unalteredPatients
         ],
         getSelectedProfile:()=>this.selectedEnrichmentCopyNumberProfile,
-        fetchData:()=>this.getCopyNumberEnrichmentData(this.alteredPatients.result,
+        fetchData:()=>this.getCopyNumberEnrichmentData(
+            this.alteredPatients.result,
             this.unalteredPatients.result, "AMP")
     });
 
