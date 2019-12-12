@@ -15,6 +15,7 @@ export interface IUserMessage {
     dateEnd:number;
     content:string;
     id:string;
+    title:string;
 };
 
 function makeMessageKey(id:string){
