@@ -10,33 +10,12 @@ import {buildCBioPortalPageUrl} from "../../shared/api/urls";
 import SocialAuthButton from "../../shared/components/SocialAuthButton";
 import {Dropdown} from 'react-bootstrap';
 import {DataAccessTokensDropdown} from "../../shared/components/dataAccessTokens/DataAccessTokensDropdown";
-import {observable, action, computed} from "mobx";
-import { ImportStudy } from 'shared/api/generated/CBioPortalAPIInternal';
-import { MobxPromiseUnionType } from 'mobxpromise';
-import { remoteData } from 'public-lib';
-import internalClient from "../../shared/api/cbioportalInternalClientInstance";
-
+import {observable} from "mobx";
 
 @observer
 export default class PortalHeader extends React.Component<{ appStore:AppStore }, {}> {
 
-    constructor(props: { appStore: AppStore}) {
-        super(props);
-
-        this.studies = remoteData({
-            await: () => [],
-            invoke: () => {
-                return internalClient.getAllImporterStudiesUsingGET({});
-            }
-        })
-    }
-
-    @observable
-    private studies: MobxPromiseUnionType<ImportStudy[]>;
-
-    @computed
-    private get tabs(){
-        const studies = this.studies;
+    private tabs(){
 
         return [
 
@@ -111,14 +90,6 @@ export default class PortalHeader extends React.Component<{ appStore:AppStore },
                 address:"/about",
                 internal:true,
                 hide:()=>AppConfig.serverConfig.skin_show_about_tab === false
-            },
-
-            {
-                id: "importer",
-                text:"Importer",
-                address: "/importer",
-                internal:false,
-                hide: () => studies.isPending || studies.result!.length == 0,
             }
         ];
 
@@ -126,7 +97,7 @@ export default class PortalHeader extends React.Component<{ appStore:AppStore },
     }
 
     private getTabs(){
-        const shownTabs = this.tabs.filter((t)=>{
+        const shownTabs = this.tabs().filter((t)=>{
             return !t.hide()
         });
 
