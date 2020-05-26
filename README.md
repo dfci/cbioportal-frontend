@@ -28,7 +28,7 @@ Remove old compiled `node_modules` if exists
 rm -rf node_modules
 ```
 
-To install all app and dev dependencies
+To install all app, and dev dependencies
 ```
 yarn install --frozen-lockfile
 ```
