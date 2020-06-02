@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { ImportStudy, ImportLog } from '../../../shared/api/generated/CBioPortalAPIInternal';
+import { ImportLog } from '../../../shared/api/generated/CBioPortalAPIInternal';
 import internalClient from "../../../shared/api/cbioportalInternalClientInstance";
 import { MobxPromiseUnionType } from 'mobxpromise';
 import { remoteData } from 'public-lib/api/remoteData';
 import { observer } from 'mobx-react';
 import { observable } from 'mobx';
+import { Link } from 'react-router';
+
 
 
 type LogDisplayProps = {
@@ -70,6 +72,18 @@ export default class LogDisplay extends React.Component<LogDisplayProps, {}> {
         }
         const logFile = this.log.result as ImportLog;
         return <div style={divStyle}>
+            <Link to={`/import/${logFile.studyId}`}>
+                <button
+                    className="btn btn-primary btn-lg"
+                    style={{
+                        position: "absolute",
+                        left: 5,
+                        top: 65,
+                    }}
+                >
+                    Back to Study
+                </button>
+            </Link>
             <h1>{logFile.logType === "import" ? "Import " : "Validation "} log {logFile.id}</h1>
             <p>
                 <b>Study Id: </b>{logFile.studyId}

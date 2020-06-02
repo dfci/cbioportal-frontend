@@ -1,4 +1,26 @@
-export function dateOrNever(date: string | undefined | null): string {
-    const regex = /\.\d\d\dZ/;
-    return date ? new Date(date).toISOString().replace("T0", " ").replace(regex, "") : "Never"
+import data from "pages/patientView/genomicOverview/mockData";
+
+export function dateOrNever(dateStr: string | undefined | null): string {
+    if (!dateStr) {
+        return "Never";
+    }
+    const date = new Date(dateStr);
+    const pieces = [
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDay(),
+        date.getHours() > 12 ? date.getHours() - 12 : date.getHours(),
+        date.getMinutes(),
+        date.getSeconds(),
+    ].map(n => twoDig(n));
+    const amPm = date.getHours() > 12 ? "PM" : "AM";
+
+    return `${pieces[0]}-${pieces[1]}-${pieces[2]} ${pieces[3]}:${pieces[4]}:${pieces[5]} ${amPm}`;
+}
+
+function twoDig(num: number): string {
+    if (num > 9) {
+        return num.toString();
+    }
+    return "0" + num.toString();
 }

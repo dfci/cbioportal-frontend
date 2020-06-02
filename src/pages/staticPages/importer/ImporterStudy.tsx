@@ -36,6 +36,8 @@ export default class ImporterStudy extends React.Component<ImporterStudyProps, {
     private validationLogs: MobxPromiseUnionType<ImportLog[]>;
     @observable
     private study: MobxPromiseUnionType<ImportStudy>;
+    @observable
+    private importButtonInfo: JSX.Element;
 
     public internalClient: CBioPortalAPIInternal;
 
@@ -72,7 +74,6 @@ export default class ImporterStudy extends React.Component<ImporterStudyProps, {
 
     @autobind
     updateButtonStates(study: ImportStudy) {
-        console.log("updating states");
         this.importClicked = study.importRunning;
         this.validateClicked = study.validationRunning;
     }
@@ -107,7 +108,7 @@ export default class ImporterStudy extends React.Component<ImporterStudyProps, {
                     {log.requester}
                 </td>
                 <td>
-                    {log.logType === "import" ? (log.testRun ? "test import " : "auto import ") : "validation "}{log.passed}
+                    {log.logType === "import" ? (log.testRun ? "test import " : "cBioPortal import ") : "validation "}{log.passed}
                 </td>
             </tr>
         })
@@ -123,20 +124,37 @@ export default class ImporterStudy extends React.Component<ImporterStudyProps, {
         return this.validateClicked ? "Running test validation..." : "Run Test Validation";
     }
 
+    @computed
+    private get lastTestImport() {
+        if (this.importLogs.isPending) {
+            return null;
+        }
+
+        const passingTestImports = this.importLogs.result!.filter(log => log.testRun && log.passed);
+        if (passingTestImports.length == 0) {
+            return null;
+        }
+        return passingTestImports[0].startDate;
+    }
+
     @autobind
     @action
     onImportClick() {
         this.importClicked = true;
         this.internalClient.runTrialImportUsingGET({studyId: this.study.result!.studyId})
-        setTimeout(() => location.reload(true), 2000);
+        this.importButtonInfo = <p>
+            Your import is running. This process can take several minutes depending on the size of your study.{ }
+            Refresh the page to see if it has completed.
+        </p>
     }
     
     @autobind
     @action
     onValidationClick() {
         this.validateClicked = true;
-        this.internalClient.runTrialValidationUsingGET({studyId: this.study.result!.studyId});
-        setTimeout(() => location.reload(true), 2000);
+        this.internalClient
+            .runTrialValidationUsingGET({studyId: this.study.result!.studyId})
+            .then((_) => location.reload(true));
     }
 
     render() {
@@ -149,7 +167,7 @@ export default class ImporterStudy extends React.Component<ImporterStudyProps, {
         const study = this.study.result as ImportStudy;
         return <div>
             <h1 style={{textAlign: "center", paddingTop: "20px"}}>
-                Import and Validation for Study {study.name}
+                Import and Validation for {study.name}
             </h1>
             <div style={{width: "50%", margin: "0 auto", background: "#ededed", borderRadius: "5px", padding: "5px"}}>
                 <b>The following users have permission to view this study: </b>
@@ -173,6 +191,12 @@ export default class ImporterStudy extends React.Component<ImporterStudyProps, {
                     </p>
                     <p>
                         <b>Validation logs:</b>
+                        <p>
+                            Below are logs of all validation attempts, both manually triggered and automated nightly{ }
+                            runs. Successful validation will soon be required to import studies, so it is important{ }
+                            to ensure your studies are passing validation. You can manually trigger a validation run{ }
+                            at any time with the button below.
+                        </p>
                         <table className="ui celled table unstackable">
                             <tr>
                                 <th>Start Date</th>
@@ -191,7 +215,10 @@ export default class ImporterStudy extends React.Component<ImporterStudyProps, {
                 </div>
                 <div style={panelStyle}>
                     <p>
-                        <b>Last successfully imported: </b>{dateOrNever(study.importDate)}
+                        <b>Last successfully import to cBioPortal: </b>{dateOrNever(study.importDate)}
+                    </p>
+                    <p>
+                        <b>Last successfully test import: </b>{dateOrNever(this.lastTestImport)}
                     </p>
                     <p>
                         <button
@@ -201,9 +228,16 @@ export default class ImporterStudy extends React.Component<ImporterStudyProps, {
                         >
                             {this.importButtonText}
                         </button>
+                        {this.importButtonInfo}
                     </p>
                     <p>
                         <b>Import logs:</b>
+                        <p>
+                            Below are logs of all attempted imports, both manually triggered and automated nightly{ }
+                            runs. Manually triggered runs are tests to confirm that import can successfully occur but{ }
+                            these test runs will not result in an updated study in cBioPortal. Official imports occur{ }
+                            each night.
+                        </p>
                         <table className="ui celled table unstackable">
                             <tr>
                                 <th>Start Date</th>

@@ -13,7 +13,7 @@ import { Link } from 'react-router';
 
 const panelStyle = {
     width: "50%",
-    margin: "0 auto",
+    margin: "20px auto",
     borderRadius: "5px",
     padding: "5px",
     background: "#ededed",
@@ -66,6 +66,16 @@ export default class Importer extends React.Component<{}, {}> {
 
         return <div style={panelStyle}>
             <h1>cBioPortal Importer Dashboard</h1>
+            <p>
+                This dashboard allows you to view validation and import logs for studies that you have access to.{ }
+                You can also validate and test import of newly updated data. Note that importing using this dashboard{ }
+                is a test import only and will not result in an updated study in cBioPortal.{ }
+                Official imports occur each night.
+            </p>
+            <p>
+                Successful validation will soon be required to import studies, so it is important to ensure your{ }
+                studies are passing validation.
+            </p>
             <table className="ui celled table unstackable" style={{width: "100%"}}>
                 <thead>
                     <tr>
