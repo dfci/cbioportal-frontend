@@ -15,7 +15,6 @@ export interface IUserMessage {
     dateEnd:number;
     content:string;
     id:string;
-    title:string;
 };
 
 function makeMessageKey(id:string){
@@ -24,11 +23,10 @@ function makeMessageKey(id:string){
 
 const MESSAGE_DATA: IUserMessage[] = [
     {
-        dateEnd:100000000000000,
-        content: `<strong>Announcing the new Group Comparison feature</strong>: Compare clinical and genomic features of user-defined groups of samples/patients.  <a class='btn btn-primary' href="https://cbioportal.org/tutorials#group-comparison" target="_blank">View Tutorial</a>`,
-        id:'3.0-intro',
-        title:'Announcing the Group Comparison feature of cBioPortal 3.0!'
-    }
+        dateEnd: 100000000000000,
+        content: `On Wednesday June 10th, we will participate in <a class="btn btn-primary btn-xs" target="_blank" href="https://www.shutdownstem.com/">#ShutDownAcademia</a>. We encourage everyone to participate. We will educate ourselves and consider how we can support the <a class="btn btn-primary btn-xs" target="_blank" href="https://blacklivesmatter.com">#BLM</a> movement. The website will be online for those who need it.`,
+        id: '20200610_blm',
+    },
 ];
 
 @observer
