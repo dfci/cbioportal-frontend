@@ -38,6 +38,8 @@ export default class ImporterStudy extends React.Component<ImporterStudyProps, {
     private study: MobxPromiseUnionType<ImportStudy>;
     @observable
     private importButtonInfo: JSX.Element;
+    @observable
+    private validationButtonInfo: JSX.Element;
 
     public internalClient: CBioPortalAPIInternal;
 
@@ -152,9 +154,11 @@ export default class ImporterStudy extends React.Component<ImporterStudyProps, {
     @action
     onValidationClick() {
         this.validateClicked = true;
-        this.internalClient
-            .runTrialValidationUsingGET({studyId: this.study.result!.studyId})
-            .then((_) => location.reload(true));
+        this.internalClient.runTrialValidationUsingGET({studyId: this.study.result!.studyId});
+        this.validationButtonInfo = <p>
+            Your validation is running. This process can take several minutes depending on the size of your study.{ }
+            Refresh the page to see if it has completed.
+        </p>
     }
 
     render() {
@@ -178,7 +182,7 @@ export default class ImporterStudy extends React.Component<ImporterStudyProps, {
             <div style={{display: "flex", flexDirection: "row"}}>
                 <div style={panelStyle}>
                     <p>
-                        <b>Last successfully validated: </b>{dateOrNever(study.validationDate)}
+                        <b>Last successful validation: </b>{dateOrNever(study.validationDate)}
                     </p>
                     <p>
                         <button
@@ -188,6 +192,7 @@ export default class ImporterStudy extends React.Component<ImporterStudyProps, {
                         >
                             {this.validationButtonText}
                         </button>
+                        {this.validationButtonInfo}
                     </p>
                     <p>
                         <b>Validation logs:</b>
@@ -215,10 +220,10 @@ export default class ImporterStudy extends React.Component<ImporterStudyProps, {
                 </div>
                 <div style={panelStyle}>
                     <p>
-                        <b>Last successfully import to cBioPortal: </b>{dateOrNever(study.importDate)}
+                        <b>Last successful import to cBioPortal: </b>{dateOrNever(study.importDate)}
                     </p>
                     <p>
-                        <b>Last successfully test import: </b>{dateOrNever(this.lastTestImport)}
+                        <b>Last successful test import: </b>{dateOrNever(this.lastTestImport)}
                     </p>
                     <p>
                         <button
