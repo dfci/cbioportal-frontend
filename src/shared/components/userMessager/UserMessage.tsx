@@ -21,13 +21,7 @@ function makeMessageKey(id:string){
     return `portalMessageKey-${id}`;
 }
 
-const MESSAGE_DATA: IUserMessage[] = [
-    {
-        dateEnd: 100000000000000,
-        content: `On Wednesday June 10th, we will participate in <a class="btn btn-primary btn-xs" target="_blank" href="https://www.shutdownstem.com/">#ShutDownAcademia</a>. We encourage everyone to participate. We will educate ourselves and consider how we can support the <a class="btn btn-primary btn-xs" target="_blank" href="https://blacklivesmatter.com">#BLM</a> movement. The website will be online for those who need it.`,
-        id: '20200610_blm',
-    },
-];
+const MESSAGE_DATA: IUserMessage[] = [];
 
 @observer
 export default class UserMessager extends React.Component<{ dataUrl?:string }, {}> {
