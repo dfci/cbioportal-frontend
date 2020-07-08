@@ -334,6 +334,8 @@ export default class StudyViewPage extends React.Component<
                 this.store.cnaProfiles,
                 this.store.selectedSamples,
                 this.store.molecularProfileSampleCounts,
+                this.store.sampleTreatments,
+                this.store.patientTreatments,
             ];
         },
         invoke: async () => {
@@ -551,6 +553,10 @@ export default class StudyViewPage extends React.Component<
                                         }
                                         linkText={
                                             StudyViewPageTabDescriptions.CLINICAL_DATA
+                                        }
+                                        hide={
+                                            this.store.selectedSamples.result
+                                                .length === 0
                                         }
                                     >
                                         <ClinicalDataTab store={this.store} />

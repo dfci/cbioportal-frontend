@@ -110,6 +110,8 @@ export type ChartType =
     | 'GENOMIC_PROFILES_TABLE'
     | 'CASE_LIST_TABLE'
     | 'CNA_GENES_TABLE'
+    | 'SAMPLE_TREATMENTS_TABLE'
+    | 'PATIENT_TREATMENTS_TABLE'
     | 'NONE';
 
 export enum SpecialChartsUniqueKeyEnum {
@@ -121,6 +123,8 @@ export enum SpecialChartsUniqueKeyEnum {
     FRACTION_GENOME_ALTERED = 'FRACTION_GENOME_ALTERED',
     GENOMIC_PROFILES_SAMPLE_COUNT = 'GENOMIC_PROFILES_SAMPLE_COUNT',
     CASE_LISTS_SAMPLE_COUNT = 'CASE_LISTS_SAMPLE_COUNT',
+    PATIENT_TREATMENTS = 'PATIENT_TREATMENTS',
+    SAMPLE_TREATMENTS = 'SAMPLE_TREATMENTS',
 }
 
 export type AnalysisGroup = {
@@ -822,7 +826,11 @@ export function isFiltered(
             _.isEmpty(filter.geneFilters) &&
             _.isEmpty(filter.genomicProfiles) &&
             _.isEmpty(filter.genomicDataFilters) &&
-            _.isEmpty(filter.caseLists))
+            _.isEmpty(filter.caseLists) &&
+            filter.patientTreatmentFilters &&
+            _.isEmpty(filter.patientTreatmentFilters.filters) &&
+            filter.sampleTreatmentFilters &&
+            _.isEmpty(filter.sampleTreatmentFilters.filters))
     );
 
     if (filter.sampleIdentifiersSet) {
