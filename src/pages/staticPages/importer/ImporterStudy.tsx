@@ -127,16 +127,29 @@ export default class ImporterStudy extends React.Component<ImporterStudyProps, {
     }
 
     @computed
-    private get lastTestImport() {
+    private get lastTestImport(): string {
         if (this.importLogs.isPending) {
-            return null;
+            return "Loading...";
         }
 
         const passingTestImports = this.importLogs.result!.filter(log => log.testRun && log.passed);
         if (passingTestImports.length == 0) {
-            return null;
+            return "Never";
         }
-        return passingTestImports[0].startDate;
+        return dateOrNever(passingTestImports[0].startDate);
+    }
+
+    @computed
+    private get lastProdImport(): string {
+        if (this.importLogs.isPending) {
+            return "Loading...";
+        }
+
+        const passingTestImports = this.importLogs.result!.filter(log => !log.testRun && log.passed);
+        if (passingTestImports.length == 0) {
+            return "Never";
+        }
+        return dateOrNever(passingTestImports[0].startDate);
     }
 
     @autobind
@@ -220,10 +233,10 @@ export default class ImporterStudy extends React.Component<ImporterStudyProps, {
                 </div>
                 <div style={panelStyle}>
                     <p>
-                        <b>Last successful import to cBioPortal: </b>{dateOrNever(study.importDate)}
+                        <b>Last successful import to cBioPortal: </b>{this.lastProdImport}
                     </p>
                     <p>
-                        <b>Last successful test import: </b>{dateOrNever(this.lastTestImport)}
+                        <b>Last successful test import: </b>{this.lastTestImport}
                     </p>
                     <p>
                         <button

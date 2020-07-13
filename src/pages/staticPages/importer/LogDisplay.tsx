@@ -6,6 +6,7 @@ import { remoteData } from 'public-lib/api/remoteData';
 import { observer } from 'mobx-react';
 import { observable } from 'mobx';
 import { Link } from 'react-router';
+import { dateOrNever } from './importerUtil';
 
 
 
@@ -92,7 +93,7 @@ export default class LogDisplay extends React.Component<LogDisplayProps, {}> {
                 <b>Test Run: </b>{logFile.testRun ? "Yes" : "No"}
             </p>
             <p>
-                <b>Run Started: </b>{new Date(logFile.startDate).toISOString()}
+                <b>Run Started: </b>{dateOrNever(logFile.startDate)}
             </p>
             <p>
                 <b>Log contents:</b>

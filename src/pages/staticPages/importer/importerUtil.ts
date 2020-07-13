@@ -7,8 +7,8 @@ export function dateOrNever(dateStr: string | undefined | null): string {
     const date = new Date(dateStr);
     const pieces = [
         date.getFullYear(),
-        date.getMonth(),
-        date.getDay(),
+        date.getMonth() + 1,
+        date.getDate(),
         date.getHours() > 12 ? date.getHours() - 12 : date.getHours(),
         date.getMinutes(),
         date.getSeconds(),
