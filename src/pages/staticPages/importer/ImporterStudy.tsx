@@ -132,7 +132,7 @@ export default class ImporterStudy extends React.Component<ImporterStudyProps, {
             return "Loading...";
         }
 
-        const passingTestImports = this.importLogs.result!.filter(log => log.testRun && log.passed);
+        const passingTestImports = this.importLogs.result!.filter(log => log.testRun && log.passed === "passed");
         if (passingTestImports.length == 0) {
             return "Never";
         }
@@ -145,11 +145,24 @@ export default class ImporterStudy extends React.Component<ImporterStudyProps, {
             return "Loading...";
         }
 
-        const passingTestImports = this.importLogs.result!.filter(log => !log.testRun && log.passed);
+        const passingTestImports = this.importLogs.result!.filter(log => !log.testRun && log.passed === "passed");
         if (passingTestImports.length == 0) {
             return "Never";
         }
         return dateOrNever(passingTestImports[0].startDate);
+    }
+
+    @computed
+    get lastValidation(): string {
+        if (this.validationLogs.isPending) {
+            return "Loading...";
+        }
+
+        const passingValidations = this.validationLogs.result!.filter(log => log.passed === "passed");
+        if (passingValidations.length == 0) {
+            return "Never";
+        }
+        return dateOrNever(passingValidations[0].startDate);
     }
 
     @autobind
@@ -195,7 +208,7 @@ export default class ImporterStudy extends React.Component<ImporterStudyProps, {
             <div style={{display: "flex", flexDirection: "row"}}>
                 <div style={panelStyle}>
                     <p>
-                        <b>Last successful validation: </b>{dateOrNever(study.validationDate)}
+                        <b>Last successful validation: </b>{this.lastValidation}
                     </p>
                     <p>
                         <button
