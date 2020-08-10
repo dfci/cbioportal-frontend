@@ -4061,6 +4061,18 @@ export class StudyViewPageStore {
                 SpecialChartsUniqueKeyEnum.PATIENT_TREATMENTS,
                 ChartTypeEnum.PATIENT_TREATMENTS_TABLE
             );
+            const patientTreatmentMeta = _.find(
+                this.chartMetaSet,
+                chartMeta =>
+                    chartMeta.uniqueKey ===
+                    SpecialChartsUniqueKeyEnum.PATIENT_TREATMENTS
+            );
+            if (patientTreatmentMeta && patientTreatmentMeta.priority !== 0) {
+                this.changeChartVisibility(
+                    SpecialChartsUniqueKeyEnum.PATIENT_TREATMENTS,
+                    true
+                );
+            }
         }
 
         if (!_.isEmpty(this.sampleTreatments.result)) {
@@ -4068,6 +4080,18 @@ export class StudyViewPageStore {
                 SpecialChartsUniqueKeyEnum.SAMPLE_TREATMENTS,
                 ChartTypeEnum.SAMPLE_TREATMENTS_TABLE
             );
+            const sampleTreatmentMeta = _.find(
+                this.chartMetaSet,
+                chartMeta =>
+                    chartMeta.uniqueKey ===
+                    SpecialChartsUniqueKeyEnum.SAMPLE_TREATMENTS
+            );
+            if (sampleTreatmentMeta && sampleTreatmentMeta.priority !== 0) {
+                this.changeChartVisibility(
+                    SpecialChartsUniqueKeyEnum.SAMPLE_TREATMENTS,
+                    true
+                );
+            }
         }
 
         if (!_.isEmpty(this.mutationProfiles.result)) {
