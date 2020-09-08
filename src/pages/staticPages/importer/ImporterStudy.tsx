@@ -18,6 +18,12 @@ const panelStyle = {
     background: "#ededed",
 }
 
+const IMPORTING_TEXT = "Your import is running. This process can take several minutes depending " + 
+    "on the size of your study. Refresh the page to see if it has completed.";
+const VALIDATING_TEXT = "Your validation is running. This process can take several minutes" + 
+" depending on the size of your study. Refresh the page to see if it has completed.";
+
+
 export type ImporterStudyProps = {
     routeParams: {
         studyId: string,
@@ -78,6 +84,14 @@ export default class ImporterStudy extends React.Component<ImporterStudyProps, {
     updateButtonStates(study: ImportStudy) {
         this.importClicked = study.importRunning;
         this.validateClicked = study.validationRunning;
+
+        if (this.importClicked) {
+            this.importButtonInfo = <p>{IMPORTING_TEXT}</p>
+        }
+
+        if (this.validateClicked) {
+            this.validationButtonInfo = <p>{VALIDATING_TEXT}</p>
+        }
     }
 
     renderLogs(logs: ImportLog[]): JSX.Element[] {
@@ -170,10 +184,7 @@ export default class ImporterStudy extends React.Component<ImporterStudyProps, {
     onImportClick() {
         this.importClicked = true;
         this.internalClient.runTrialImportUsingGET({studyId: this.study.result!.studyId})
-        this.importButtonInfo = <p>
-            Your import is running. This process can take several minutes depending on the size of your study.{ }
-            Refresh the page to see if it has completed.
-        </p>
+        this.importButtonInfo = <p>{IMPORTING_TEXT}</p>
     }
     
     @autobind
@@ -181,10 +192,7 @@ export default class ImporterStudy extends React.Component<ImporterStudyProps, {
     onValidationClick() {
         this.validateClicked = true;
         this.internalClient.runTrialValidationUsingGET({studyId: this.study.result!.studyId});
-        this.validationButtonInfo = <p>
-            Your validation is running. This process can take several minutes depending on the size of your study.{ }
-            Refresh the page to see if it has completed.
-        </p>
+        this.validationButtonInfo = <p>{VALIDATING_TEXT}</p>
     }
 
     render() {
