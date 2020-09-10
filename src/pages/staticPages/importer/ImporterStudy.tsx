@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { dateOrNever } from './importerUtil';
+import { dateOrNever, parseUrlParams } from './importerUtil';
 import autobind from 'autobind-decorator';
 import { observable, action, computed } from 'mobx';
 import { observer } from 'mobx-react';
@@ -9,6 +9,7 @@ import {remoteData} from "../../../public-lib/api/remoteData";
 import { MobxPromiseUnionType } from 'mobxpromise';
 import { Link } from 'react-router';
 import { Button } from 'react-bootstrap';
+import ImporterHelp from './ImporterHelp';
 
 const panelStyle = {
     width: "50%",
@@ -30,8 +31,11 @@ export type ImporterStudyProps = {
     };
 }
 
+
 @observer
 export default class ImporterStudy extends React.Component<ImporterStudyProps, {}> {
+    @observable
+    private displayHelp: boolean = !!parseUrlParams().help;
     @observable
     private importClicked: boolean = true;
     @observable
@@ -195,7 +199,16 @@ export default class ImporterStudy extends React.Component<ImporterStudyProps, {
         this.validationButtonInfo = <p>{VALIDATING_TEXT}</p>
     }
 
+    @autobind
+    @action
+    onHelpClick() {
+        window.location.search = "help=1";
+    }
+
     render() {
+        if (this.displayHelp) {
+            return <ImporterHelp/>
+        }
         if (this.study.isPending) {
             return <div>Loading...</div>
         }
@@ -306,6 +319,17 @@ export default class ImporterStudy extends React.Component<ImporterStudyProps, {
                     Back to Dashboard
                 </button>
             </Link>
+            <button
+                className="btn btn-primary btn-lg"
+                style={{
+                    position: "absolute",
+                    right: 5,
+                    top: 65,
+                }}
+                onClick={this.onHelpClick}
+            >
+                Help
+            </button>
         </div>
     }
 }

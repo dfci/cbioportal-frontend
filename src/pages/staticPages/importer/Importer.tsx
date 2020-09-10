@@ -1,15 +1,16 @@
 import * as React from 'react';
-import { observable } from 'mobx';
+import { observable, action } from 'mobx';
 import { observer } from 'mobx-react';
 import {remoteData} from "../../../public-lib/api/remoteData";
 import autobind from 'autobind-decorator';
 import ImportStudyComponent from './ImporterStudy';
-import { dateOrNever } from './importerUtil';
+import { dateOrNever, parseUrlParams } from './importerUtil';
 import {
     default as CBioPortalAPIInternal, ImportStudy
 } from "shared/api/generated/CBioPortalAPIInternal";
 import internalClient from "../../../shared/api/cbioportalInternalClientInstance";
 import { Link } from 'react-router';
+import ImporterHelp from './ImporterHelp';
 
 const panelStyle = {
     width: "50%",
@@ -21,6 +22,9 @@ const panelStyle = {
 
 @observer
 export default class Importer extends React.Component<{}, {}> {
+    @observable
+    private displayHelp: boolean = !!parseUrlParams().help;
+    
     constructor(_: {}) {
         super(_);
         this.internalClient = internalClient;
@@ -35,6 +39,12 @@ export default class Importer extends React.Component<{}, {}> {
             return internalClient.getAllImporterStudiesUsingGET({})
         } 
     })
+
+    @autobind
+    @action
+    onHelpClick() {
+        window.location.search = "help=1";
+    }
 
     renderStudy(study: ImportStudy): JSX.Element {
         return <tr className={study.name === "Foo" ? "negative" : "positive"}>
@@ -58,6 +68,10 @@ export default class Importer extends React.Component<{}, {}> {
     }
 
     public render() {
+        if (this.displayHelp) {
+            return <ImporterHelp/>
+        }
+        
         if (this.studies.isPending) {
             return <div>
                 Loading...
@@ -89,6 +103,17 @@ export default class Importer extends React.Component<{}, {}> {
                     {this.renderStudies(this.studies.result as ImportStudy[])}
                 </tbody>
             </table>
+            <button
+                className="btn btn-primary btn-lg"
+                style={{
+                    position: "absolute",
+                    right: 5,
+                    top: 65,
+                }}
+                onClick={this.onHelpClick}
+            >
+                Help
+            </button>
         </div>
     }
 }

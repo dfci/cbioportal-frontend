@@ -24,3 +24,10 @@ function twoDig(num: number): string {
     }
     return "0" + num.toString();
 }
+
+export function parseUrlParams() {
+    return window.location.search.substring(1)
+        .split("&")
+        .map(p => p.split("="))
+        .reduce((a, c) => {a[c[0]] = c[1]; return a}, {} as any);
+}
