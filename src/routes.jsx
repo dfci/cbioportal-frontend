@@ -92,6 +92,20 @@ const GroupComparisonPage = SuspenseWrapper(
 const ErrorPage = SuspenseWrapper(
     React.lazy(() => import('./pages/resultsView/ErrorPage'))
 );
+const Importer = SuspenseWrapper(
+    React.lazy(() => import('./pages/staticPages/importer/Importer'))
+);
+const ImporterStudy = SuspenseWrapper(
+    React.lazy(() => import('./pages/staticPages/importer/ImporterStudy'))
+);
+const LogDisplay = SuspenseWrapper(
+    React.lazy(() => import('./pages/staticPages/importer/LogDisplay'))
+);
+const DownloadProfileData = SuspenseWrapper(
+    React.lazy(() =>
+        import('./pages/staticPages/downloadProfileData/DownloadProfileData')
+    )
+);
 
 import $ from 'jquery';
 import { getBrowserWindow } from 'cbioportal-frontend-commons';
@@ -400,6 +414,16 @@ export const makeRoutes = routing => {
                             tabParamValidator(StudyViewPageTabKeyEnum)
                         )
                     )}
+                />
+                <Route path="/importer" component={Importer} />
+                <Route path="/import/:studyId" component={ImporterStudy} />
+                <Route
+                    path="/logs/:logType/:studyId/:logId"
+                    component={LogDisplay}
+                />
+                <Route
+                    path="/downloadProfileData"
+                    component={DownloadProfileData}
                 />
 
                 <Route

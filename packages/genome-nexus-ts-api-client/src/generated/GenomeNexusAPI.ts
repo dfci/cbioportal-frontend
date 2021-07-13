@@ -1021,17 +1021,14 @@ Aside from programmatic clients there are web based tools to annotate variants, 
  */
 export default class GenomeNexusAPI {
 
-    private domain: string = "";
+    private domain: string = "https://cbioportal.dfci.harvard.edu:8443/cbioportal/proxy/genome-nexus:8888"; 
     private errorHandlers: CallbackHandler[] = [];
 
     constructor(domain ? : string) {
-        if (domain) {
-            this.domain = domain;
-        }
     }
 
     getDomain() {
-        return this.domain;
+        return "https://cbioportal.dfci.harvard.edu:8443/cbioportal/proxy/genome-nexus:8888";
     }
 
     addErrorHandler(handler: CallbackHandler) {

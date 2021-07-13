@@ -58,5 +58,7 @@ export {
     ClinicalAttributeCountFilter,
     MutationCountByPosition,
     ResourceDefinition,
+    ImportLog,
+    ImportStudy,
     default as CBioPortalAPIInternal,
 } from './generated/CBioPortalAPIInternal';
