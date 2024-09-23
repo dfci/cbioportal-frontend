@@ -104,15 +104,18 @@ export default class MutationMapperToolStore {
     }
 
     @computed get genomeNexusClient() {
-        let client = defaultGenomeNexusClient;
-        if (
-            this.mutationMapperStoreConfigOverride?.genomeBuild ===
-            REFERENCE_GENOME.grch38.UCSC
-        ) {
-            client = new GenomeNexusAPI(
-                getServerConfig().genomenexus_url_grch38!
-            );
-        }
+        // let client = defaultGenomeNexusClient;
+        let client = new GenomeNexusAPI(
+            this.mutationMapperStoreConfigOverride?.genomeBuild
+        );
+        // if (
+        //     this.mutationMapperStoreConfigOverride?.genomeBuild ===
+        //     REFERENCE_GENOME.grch38.UCSC
+        // ) {
+        //     client = new GenomeNexusAPI(
+        //         getServerConfig().genomenexus_url_grch38!
+        //     );
+        // }
 
         client.addErrorHandler(err => {
             eventBus.emit(
@@ -129,15 +132,18 @@ export default class MutationMapperToolStore {
     }
 
     @computed get genomeNexusInternalClient() {
-        let client = defaultGenomeNexusInternalClient;
-        if (
-            this.mutationMapperStoreConfigOverride?.genomeBuild ===
-            REFERENCE_GENOME.grch38.UCSC
-        ) {
-            client = new GenomeNexusAPIInternal(
-                getServerConfig().genomenexus_url_grch38!
-            );
-        }
+        // let client = defaultGenomeNexusInternalClient;
+        let client = new GenomeNexusAPIInternal(
+            this.mutationMapperStoreConfigOverride?.genomeBuild
+        );
+        // if (
+        //     this.mutationMapperStoreConfigOverride?.genomeBuild ===
+        //     REFERENCE_GENOME.grch38.UCSC
+        // ) {
+        //     client = new GenomeNexusAPIInternal(
+        //         getServerConfig().genomenexus_url_grch38!
+        //     );
+        // }
 
         client.addErrorHandler(err => {
             eventBus.emit(

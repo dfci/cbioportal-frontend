@@ -131,5 +131,7 @@ export {
     SurvivalRequest,
     VariantCount,
     VariantCountIdentifier,
+    ImportLog,
+    ImportStudy,
     default as CBioPortalAPIInternal,
 } from './generated/CBioPortalAPIInternal';
