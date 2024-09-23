@@ -86,6 +86,18 @@ const ErrorPage = SuspenseWrapper(
     // @ts-ignore
     React.lazy(() => import('./pages/resultsView/ErrorPage'))
 );
+const Importer = SuspenseWrapper(
+    // @ts-ignore
+    React.lazy(() => import('./pages/staticPages/importer/Importer'))
+);
+const ImporterStudy = SuspenseWrapper(
+    // @ts-ignore
+    React.lazy(() => import('./pages/staticPages/importer/ImporterStudy'))
+);
+const LogDisplay = SuspenseWrapper(
+    // @ts-ignore
+    React.lazy(() => import('./pages/staticPages/importer/LogDisplay'))
+);
 
 const WebAPIPage = SuspenseWrapper(
     // @ts-ignore
@@ -403,6 +415,12 @@ export const makeRoutes = () => {
                             tabParamValidator(StudyViewPageTabKeyEnum)
                         )
                     )}
+                />
+                <Route path="/importer" component={Importer} />
+                <Route path="/import/:studyId" component={ImporterStudy} />
+                <Route
+                    path="/logs/:logType/:studyId/:logId"
+                    component={LogDisplay}
                 />
                 <Route
                     path="/comparison/:tab?"
