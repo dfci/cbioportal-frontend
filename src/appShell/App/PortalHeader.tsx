@@ -103,25 +103,12 @@ export default class PortalHeader extends React.Component<
             },
 
             {
-                id: 'chat',
-                text: (
-                    <>
-                        Chat{' '}
-                        <strong className={'beta-text'}>Beta!</strong>
-                    </>
-                ),
-                address:
-                    getServerConfig().app_name === 'mskcc-portal'
-                        ? 'https://chat.cbioportal.aws.mskcc.org'
-                        : 'https://chat.cbioportal.org',
-                internal: false,
+                id: 'downloadprofiledata',
+                text: 'Download Profile Data',
+                address: '/DownloadProfileData',
+                internal: true,
                 hide: () =>
-                    !this.props.appStore.featureFlagStore.has(
-                        FeatureFlagEnum.CHAT
-                    ) ||
-                    !['public-portal', 'mskcc-portal'].includes(
-                        getServerConfig().app_name!
-                    ),
+                    getServerConfig().skin_show_profile_download_tab === false,
             },
 
             {
