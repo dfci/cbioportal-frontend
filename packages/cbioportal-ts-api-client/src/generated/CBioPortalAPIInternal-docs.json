@@ -1654,6 +1654,191 @@
         "operationId": "fetchGenomicDataCountsUsingPOST"
       }
     },
+    "/api/importer/": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/ImportStudy"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "tags": [
+          "Import"
+        ],
+        "description": "Get a list of all studies in the importer",
+        "operationId": "getAllImporterStudiesUsingGET"
+      }
+    },
+    "/api/importer/{studyId}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "studyId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImportStudy"
+            }
+          }
+        },
+        "tags": [
+          "Import"
+        ],
+        "description": "Get study details",
+        "operationId": "getImporterStudyUsingGET"
+      }
+    },
+    "/api/importer/{studyId}/import": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "studyId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "tags": [
+          "Import"
+        ],
+        "description": "Run a trial import of the studyId",
+        "operationId": "runTrialImportUsingGET"
+      }
+    },
+    "/api/importer/{studyId}/validate": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "studyId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "tags": [
+          "Import"
+        ],
+        "description": "Run a trial validation of the studyId",
+        "operationId": "runTrialValidationUsingGET"
+      }
+    },
+    "/api/logs/{logType}/{studyId}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "logType",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "studyId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/ImportLog"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "tags": [
+          "Import"
+        ],
+        "description": "Get the specified log file",
+        "operationId": "getAllLogsForStudyUsingGET"
+      }
+    },
+    "/api/logs/{logType}/{studyId}/{id}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "logType",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "studyId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImportLog"
+            }
+          }
+        },
+        "tags": [
+          "Import"
+        ],
+        "description": "Get the specified log file",
+        "operationId": "getLogUsingGET"
+      }
+    },
     "/api/molecular-profile-sample-counts/fetch": {
       "post": {
         "consumes": [
@@ -5551,6 +5736,95 @@
         "name",
         "standardDeviation"
       ],
+      "type": "object"
+    },
+    "ImportLog": {
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "logType": {
+          "type": "string"
+        },
+        "passed": {
+          "type": "string"
+        },
+        "rawText": {
+          "type": "string"
+        },
+        "requester": {
+          "type": "string"
+        },
+        "startDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "studyId": {
+          "type": "string"
+        },
+        "testRun": {
+          "type": "boolean"
+        },
+        "text": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ImportStudy": {
+      "properties": {
+        "backupPath": {
+          "type": "string"
+        },
+        "importDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "importLogs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "importRunning": {
+          "type": "boolean"
+        },
+        "imported": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "studyId": {
+          "type": "string"
+        },
+        "studyPath": {
+          "type": "string"
+        },
+        "users": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "validated": {
+          "type": "boolean"
+        },
+        "validationDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "validationLogs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "validationRunning": {
+          "type": "boolean"
+        }
+      },
       "type": "object"
     },
     "MolecularProfileCaseIdentifier": {
