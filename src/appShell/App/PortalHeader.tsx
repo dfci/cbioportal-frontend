@@ -94,6 +94,14 @@ export default class PortalHeader extends React.Component<
             },
 
             {
+                id: 'downloadprofiledata',
+                text: 'Download Profile Data',
+                address: '/DownloadProfileData',
+                internal: false,
+                hide: () => getServerConfig().show_profile_download === false,
+            },
+
+            {
                 id: 'donate',
                 text: (
                     <>
