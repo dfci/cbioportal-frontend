@@ -339,6 +339,33 @@ export type CoExpressionFilter = {
         'sampleListId': string
 
 };
+export type ContentDisposition = {
+    'attachment': boolean
+
+        'charset': {
+        'registered': boolean
+
+    }
+
+        'creationDate': string
+
+        'filename': string
+
+        'formData': boolean
+
+        'inline': boolean
+
+        'modificationDate': string
+
+        'name': string
+
+        'readDate': string
+
+        'size': number
+
+        'type': string
+
+};
 export type CopyNumberCount = {
     'alteration': number
 
@@ -792,6 +819,93 @@ export type GroupStatistics = {
         'standardDeviation': number
 
 };
+export type HttpMethod = {};
+export type HttpRange = {};
+export type HttpStatusCode = {
+    'error': boolean
+
+        'is1xxInformational': boolean
+
+        'is2xxSuccessful': boolean
+
+        'is3xxRedirection': boolean
+
+        'is4xxClientError': boolean
+
+        'is5xxServerError': boolean
+
+};
+export type ImportLog = {
+    'id': number
+
+        'logType': string
+
+        'passed': string
+
+        'rawText': string
+
+        'requester': string
+
+        'startDate': string
+
+        'studyId': string
+
+        'testRun': boolean
+
+        'text': string
+
+};
+export type ImportStudy = {
+    'backupPath': string
+
+        'importDate': string
+
+        'importLogs': Array < string >
+
+        'importRunning': boolean
+
+        'imported': boolean
+
+        'name': string
+
+        'studyId': string
+
+        'studyPath': string
+
+        'users': Array < string >
+
+        'validated': boolean
+
+        'validationDate': string
+
+        'validationLogs': Array < string >
+
+        'validationRunning': boolean
+
+};
+export type MediaType = {
+    'parameters': {}
+
+    'charset': {
+        'registered': boolean
+
+    }
+
+    'concrete': boolean
+
+        'qualityValue': number
+
+        'subtype': string
+
+        'subtypeSuffix': string
+
+        'type': string
+
+        'wildcardSubtype': boolean
+
+        'wildcardType': boolean
+
+};
 export type MolecularProfileCaseIdentifier = {
     'caseId': string
 
@@ -981,6 +1095,786 @@ export type ResourceDefinition = {
         'resourceType': "STUDY" | "SAMPLE" | "PATIENT"
 
         'studyId': string
+
+};
+export type ResponseEntityImportStudy = {
+    'body': ImportStudy
+
+        'headers': {
+        'host': {
+            'address': {
+                'address': Array < string >
+
+                    'anyLocalAddress': boolean
+
+                    'canonicalHostName': string
+
+                    'hostAddress': string
+
+                    'hostName': string
+
+                    'linkLocalAddress': boolean
+
+                    'loopbackAddress': boolean
+
+                    'mcglobal': boolean
+
+                    'mclinkLocal': boolean
+
+                    'mcnodeLocal': boolean
+
+                    'mcorgLocal': boolean
+
+                    'mcsiteLocal': boolean
+
+                    'multicastAddress': boolean
+
+                    'siteLocalAddress': boolean
+
+            }
+
+            'hostName': string
+
+                'hostString': string
+
+                'port': number
+
+                'unresolved': boolean
+
+        }
+
+        'accept': Array < MediaType >
+
+            'acceptCharset': Array < {
+                'registered': boolean
+
+            } >
+
+            'acceptLanguage': Array < {
+                'range': string
+
+                    'weight': number
+
+            } >
+
+            'acceptLanguageAsLocales': Array < {
+                'country': string
+
+                    'displayCountry': string
+
+                    'displayLanguage': string
+
+                    'displayName': string
+
+                    'displayScript': string
+
+                    'displayVariant': string
+
+                    'extensionKeys': Array < string >
+
+                    'iso3Country': string
+
+                    'iso3Language': string
+
+                    'language': string
+
+                    'script': string
+
+                    'unicodeLocaleAttributes': Array < string >
+
+                    'unicodeLocaleKeys': Array < string >
+
+                    'variant': string
+
+            } >
+
+            'acceptPatch': Array < MediaType >
+
+            'accessControlAllowCredentials': boolean
+
+            'accessControlAllowHeaders': Array < string >
+
+            'accessControlAllowMethods': Array < HttpMethod >
+
+            'accessControlAllowOrigin': string
+
+            'accessControlExposeHeaders': Array < string >
+
+            'accessControlMaxAge': number
+
+            'accessControlRequestHeaders': Array < string >
+
+            'accessControlRequestMethod': HttpMethod
+
+            'all': {}
+
+            'allow': Array < HttpMethod >
+
+            'basicAuth': string
+
+            'bearerAuth': string
+
+            'cacheControl': string
+
+            'connection': Array < string >
+
+            'contentDisposition': ContentDisposition
+
+            'contentLanguage': {
+            'country': string
+
+                'displayCountry': string
+
+                'displayLanguage': string
+
+                'displayName': string
+
+                'displayScript': string
+
+                'displayVariant': string
+
+                'extensionKeys': Array < string >
+
+                'iso3Country': string
+
+                'iso3Language': string
+
+                'language': string
+
+                'script': string
+
+                'unicodeLocaleAttributes': Array < string >
+
+                'unicodeLocaleKeys': Array < string >
+
+                'variant': string
+
+        }
+
+            'contentLength': number
+
+            'contentType': MediaType
+
+            'date': number
+
+            'empty': boolean
+
+            'etag': string
+
+            'expires': number
+
+            'ifMatch': Array < string >
+
+            'ifModifiedSince': number
+
+            'ifNoneMatch': Array < string >
+
+            'ifUnmodifiedSince': number
+
+            'lastModified': number
+
+            'location': string
+
+            'origin': string
+
+            'pragma': string
+
+            'range': Array < HttpRange >
+
+            'upgrade': string
+
+            'vary': Array < string >
+
+    }
+
+        'statusCode': HttpStatusCode
+
+        'statusCodeValue': number
+
+};
+export type ResponseEntityListImportLog = {
+    'body': Array < ImportLog >
+
+        'headers': {
+            'host': {
+                'address': {
+                    'address': Array < string >
+
+                        'anyLocalAddress': boolean
+
+                        'canonicalHostName': string
+
+                        'hostAddress': string
+
+                        'hostName': string
+
+                        'linkLocalAddress': boolean
+
+                        'loopbackAddress': boolean
+
+                        'mcglobal': boolean
+
+                        'mclinkLocal': boolean
+
+                        'mcnodeLocal': boolean
+
+                        'mcorgLocal': boolean
+
+                        'mcsiteLocal': boolean
+
+                        'multicastAddress': boolean
+
+                        'siteLocalAddress': boolean
+
+                }
+
+                'hostName': string
+
+                    'hostString': string
+
+                    'port': number
+
+                    'unresolved': boolean
+
+            }
+
+            'accept': Array < MediaType >
+
+                'acceptCharset': Array < {
+                    'registered': boolean
+
+                } >
+
+                'acceptLanguage': Array < {
+                    'range': string
+
+                        'weight': number
+
+                } >
+
+                'acceptLanguageAsLocales': Array < {
+                    'country': string
+
+                        'displayCountry': string
+
+                        'displayLanguage': string
+
+                        'displayName': string
+
+                        'displayScript': string
+
+                        'displayVariant': string
+
+                        'extensionKeys': Array < string >
+
+                        'iso3Country': string
+
+                        'iso3Language': string
+
+                        'language': string
+
+                        'script': string
+
+                        'unicodeLocaleAttributes': Array < string >
+
+                        'unicodeLocaleKeys': Array < string >
+
+                        'variant': string
+
+                } >
+
+                'acceptPatch': Array < MediaType >
+
+                'accessControlAllowCredentials': boolean
+
+                'accessControlAllowHeaders': Array < string >
+
+                'accessControlAllowMethods': Array < HttpMethod >
+
+                'accessControlAllowOrigin': string
+
+                'accessControlExposeHeaders': Array < string >
+
+                'accessControlMaxAge': number
+
+                'accessControlRequestHeaders': Array < string >
+
+                'accessControlRequestMethod': HttpMethod
+
+                'all': {}
+
+                'allow': Array < HttpMethod >
+
+                'basicAuth': string
+
+                'bearerAuth': string
+
+                'cacheControl': string
+
+                'connection': Array < string >
+
+                'contentDisposition': ContentDisposition
+
+                'contentLanguage': {
+                'country': string
+
+                    'displayCountry': string
+
+                    'displayLanguage': string
+
+                    'displayName': string
+
+                    'displayScript': string
+
+                    'displayVariant': string
+
+                    'extensionKeys': Array < string >
+
+                    'iso3Country': string
+
+                    'iso3Language': string
+
+                    'language': string
+
+                    'script': string
+
+                    'unicodeLocaleAttributes': Array < string >
+
+                    'unicodeLocaleKeys': Array < string >
+
+                    'variant': string
+
+            }
+
+                'contentLength': number
+
+                'contentType': MediaType
+
+                'date': number
+
+                'empty': boolean
+
+                'etag': string
+
+                'expires': number
+
+                'ifMatch': Array < string >
+
+                'ifModifiedSince': number
+
+                'ifNoneMatch': Array < string >
+
+                'ifUnmodifiedSince': number
+
+                'lastModified': number
+
+                'location': string
+
+                'origin': string
+
+                'pragma': string
+
+                'range': Array < HttpRange >
+
+                'upgrade': string
+
+                'vary': Array < string >
+
+        }
+
+        'statusCode': HttpStatusCode
+
+        'statusCodeValue': number
+
+};
+export type ResponseEntityListImportStudy = {
+    'body': Array < ImportStudy >
+
+        'headers': {
+            'host': {
+                'address': {
+                    'address': Array < string >
+
+                        'anyLocalAddress': boolean
+
+                        'canonicalHostName': string
+
+                        'hostAddress': string
+
+                        'hostName': string
+
+                        'linkLocalAddress': boolean
+
+                        'loopbackAddress': boolean
+
+                        'mcglobal': boolean
+
+                        'mclinkLocal': boolean
+
+                        'mcnodeLocal': boolean
+
+                        'mcorgLocal': boolean
+
+                        'mcsiteLocal': boolean
+
+                        'multicastAddress': boolean
+
+                        'siteLocalAddress': boolean
+
+                }
+
+                'hostName': string
+
+                    'hostString': string
+
+                    'port': number
+
+                    'unresolved': boolean
+
+            }
+
+            'accept': Array < MediaType >
+
+                'acceptCharset': Array < {
+                    'registered': boolean
+
+                } >
+
+                'acceptLanguage': Array < {
+                    'range': string
+
+                        'weight': number
+
+                } >
+
+                'acceptLanguageAsLocales': Array < {
+                    'country': string
+
+                        'displayCountry': string
+
+                        'displayLanguage': string
+
+                        'displayName': string
+
+                        'displayScript': string
+
+                        'displayVariant': string
+
+                        'extensionKeys': Array < string >
+
+                        'iso3Country': string
+
+                        'iso3Language': string
+
+                        'language': string
+
+                        'script': string
+
+                        'unicodeLocaleAttributes': Array < string >
+
+                        'unicodeLocaleKeys': Array < string >
+
+                        'variant': string
+
+                } >
+
+                'acceptPatch': Array < MediaType >
+
+                'accessControlAllowCredentials': boolean
+
+                'accessControlAllowHeaders': Array < string >
+
+                'accessControlAllowMethods': Array < HttpMethod >
+
+                'accessControlAllowOrigin': string
+
+                'accessControlExposeHeaders': Array < string >
+
+                'accessControlMaxAge': number
+
+                'accessControlRequestHeaders': Array < string >
+
+                'accessControlRequestMethod': HttpMethod
+
+                'all': {}
+
+                'allow': Array < HttpMethod >
+
+                'basicAuth': string
+
+                'bearerAuth': string
+
+                'cacheControl': string
+
+                'connection': Array < string >
+
+                'contentDisposition': ContentDisposition
+
+                'contentLanguage': {
+                'country': string
+
+                    'displayCountry': string
+
+                    'displayLanguage': string
+
+                    'displayName': string
+
+                    'displayScript': string
+
+                    'displayVariant': string
+
+                    'extensionKeys': Array < string >
+
+                    'iso3Country': string
+
+                    'iso3Language': string
+
+                    'language': string
+
+                    'script': string
+
+                    'unicodeLocaleAttributes': Array < string >
+
+                    'unicodeLocaleKeys': Array < string >
+
+                    'variant': string
+
+            }
+
+                'contentLength': number
+
+                'contentType': MediaType
+
+                'date': number
+
+                'empty': boolean
+
+                'etag': string
+
+                'expires': number
+
+                'ifMatch': Array < string >
+
+                'ifModifiedSince': number
+
+                'ifNoneMatch': Array < string >
+
+                'ifUnmodifiedSince': number
+
+                'lastModified': number
+
+                'location': string
+
+                'origin': string
+
+                'pragma': string
+
+                'range': Array < HttpRange >
+
+                'upgrade': string
+
+                'vary': Array < string >
+
+        }
+
+        'statusCode': HttpStatusCode
+
+        'statusCodeValue': number
+
+};
+export type ResponseEntityString = {
+    'body': string
+
+        'headers': {
+        'host': {
+            'address': {
+                'address': Array < string >
+
+                    'anyLocalAddress': boolean
+
+                    'canonicalHostName': string
+
+                    'hostAddress': string
+
+                    'hostName': string
+
+                    'linkLocalAddress': boolean
+
+                    'loopbackAddress': boolean
+
+                    'mcglobal': boolean
+
+                    'mclinkLocal': boolean
+
+                    'mcnodeLocal': boolean
+
+                    'mcorgLocal': boolean
+
+                    'mcsiteLocal': boolean
+
+                    'multicastAddress': boolean
+
+                    'siteLocalAddress': boolean
+
+            }
+
+            'hostName': string
+
+                'hostString': string
+
+                'port': number
+
+                'unresolved': boolean
+
+        }
+
+        'accept': Array < MediaType >
+
+            'acceptCharset': Array < {
+                'registered': boolean
+
+            } >
+
+            'acceptLanguage': Array < {
+                'range': string
+
+                    'weight': number
+
+            } >
+
+            'acceptLanguageAsLocales': Array < {
+                'country': string
+
+                    'displayCountry': string
+
+                    'displayLanguage': string
+
+                    'displayName': string
+
+                    'displayScript': string
+
+                    'displayVariant': string
+
+                    'extensionKeys': Array < string >
+
+                    'iso3Country': string
+
+                    'iso3Language': string
+
+                    'language': string
+
+                    'script': string
+
+                    'unicodeLocaleAttributes': Array < string >
+
+                    'unicodeLocaleKeys': Array < string >
+
+                    'variant': string
+
+            } >
+
+            'acceptPatch': Array < MediaType >
+
+            'accessControlAllowCredentials': boolean
+
+            'accessControlAllowHeaders': Array < string >
+
+            'accessControlAllowMethods': Array < HttpMethod >
+
+            'accessControlAllowOrigin': string
+
+            'accessControlExposeHeaders': Array < string >
+
+            'accessControlMaxAge': number
+
+            'accessControlRequestHeaders': Array < string >
+
+            'accessControlRequestMethod': HttpMethod
+
+            'all': {}
+
+            'allow': Array < HttpMethod >
+
+            'basicAuth': string
+
+            'bearerAuth': string
+
+            'cacheControl': string
+
+            'connection': Array < string >
+
+            'contentDisposition': ContentDisposition
+
+            'contentLanguage': {
+            'country': string
+
+                'displayCountry': string
+
+                'displayLanguage': string
+
+                'displayName': string
+
+                'displayScript': string
+
+                'displayVariant': string
+
+                'extensionKeys': Array < string >
+
+                'iso3Country': string
+
+                'iso3Language': string
+
+                'language': string
+
+                'script': string
+
+                'unicodeLocaleAttributes': Array < string >
+
+                'unicodeLocaleKeys': Array < string >
+
+                'variant': string
+
+        }
+
+            'contentLength': number
+
+            'contentType': MediaType
+
+            'date': number
+
+            'empty': boolean
+
+            'etag': string
+
+            'expires': number
+
+            'ifMatch': Array < string >
+
+            'ifModifiedSince': number
+
+            'ifNoneMatch': Array < string >
+
+            'ifUnmodifiedSince': number
+
+            'lastModified': number
+
+            'location': string
+
+            'origin': string
+
+            'pragma': string
+
+            'range': Array < HttpRange >
+
+            'upgrade': string
+
+            'vary': Array < string >
+
+    }
+
+        'statusCode': HttpStatusCode
+
+        'statusCodeValue': number
 
 };
 export type Sample = {
@@ -4688,6 +5582,484 @@ export default class CBioPortalAPIInternal {
                 return response.body;
             });
         };
+    getAllImporterStudiesUsingGETURL(parameters: {
+        $queryParameters ? : any
+    }): string {
+        let queryParameters: any = {};
+        let path = '/api/importer/';
+
+        if (parameters.$queryParameters) {
+            Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
+                var parameter = parameters.$queryParameters[parameterName];
+                queryParameters[parameterName] = parameter;
+            });
+        }
+        let keys = Object.keys(queryParameters);
+        return this.domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
+    };
+
+    /**
+     * Get a list of all studies in the importer
+     * @method
+     * @name CBioPortalAPIInternal#getAllImporterStudiesUsingGET
+     */
+    getAllImporterStudiesUsingGETWithHttpInfo(parameters: {
+        $queryParameters ? : any,
+            $domain ? : string
+    }): Promise < request.Response > {
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
+        const errorHandlers = this.errorHandlers;
+        const request = this.request;
+        let path = '/api/importer/';
+        let body: any;
+        let queryParameters: any = {};
+        let headers: any = {};
+        let form: any = {};
+        return new Promise(function(resolve, reject) {
+            headers['Accept'] = 'application/json';
+
+            if (parameters.$queryParameters) {
+                Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
+                    var parameter = parameters.$queryParameters[parameterName];
+                    queryParameters[parameterName] = parameter;
+                });
+            }
+
+            request('GET', domain + path, body, headers, queryParameters, form, reject, resolve, errorHandlers);
+
+        });
+    };
+
+    /**
+     * Get a list of all studies in the importer
+     * @method
+     * @name CBioPortalAPIInternal#getAllImporterStudiesUsingGET
+     */
+    getAllImporterStudiesUsingGET(parameters: {
+        $queryParameters ? : any,
+            $domain ? : string
+    }): Promise < ResponseEntityListImportStudy > {
+        return this.getAllImporterStudiesUsingGETWithHttpInfo(parameters).then(function(response: request.Response) {
+            return response.body;
+        });
+    };
+    getImporterStudyUsingGETURL(parameters: {
+        'studyId': string,
+        $queryParameters ? : any
+    }): string {
+        let queryParameters: any = {};
+        let path = '/api/importer/{studyId}';
+
+        path = path.replace('{studyId}', parameters['studyId'] + '');
+
+        if (parameters.$queryParameters) {
+            Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
+                var parameter = parameters.$queryParameters[parameterName];
+                queryParameters[parameterName] = parameter;
+            });
+        }
+        let keys = Object.keys(queryParameters);
+        return this.domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
+    };
+
+    /**
+     * Get study details
+     * @method
+     * @name CBioPortalAPIInternal#getImporterStudyUsingGET
+     * @param {string} studyId - A web service for supplying JSON formatted data to cBioPortal clients. Please note that this API is currently in beta and subject to change.
+     */
+    getImporterStudyUsingGETWithHttpInfo(parameters: {
+        'studyId': string,
+        $queryParameters ? : any,
+        $domain ? : string
+    }): Promise < request.Response > {
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
+        const errorHandlers = this.errorHandlers;
+        const request = this.request;
+        let path = '/api/importer/{studyId}';
+        let body: any;
+        let queryParameters: any = {};
+        let headers: any = {};
+        let form: any = {};
+        return new Promise(function(resolve, reject) {
+            headers['Accept'] = 'application/json';
+
+            path = path.replace('{studyId}', parameters['studyId'] + '');
+
+            if (parameters['studyId'] === undefined) {
+                reject(new Error('Missing required  parameter: studyId'));
+                return;
+            }
+
+            if (parameters.$queryParameters) {
+                Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
+                    var parameter = parameters.$queryParameters[parameterName];
+                    queryParameters[parameterName] = parameter;
+                });
+            }
+
+            request('GET', domain + path, body, headers, queryParameters, form, reject, resolve, errorHandlers);
+
+        });
+    };
+
+    /**
+     * Get study details
+     * @method
+     * @name CBioPortalAPIInternal#getImporterStudyUsingGET
+     * @param {string} studyId - A web service for supplying JSON formatted data to cBioPortal clients. Please note that this API is currently in beta and subject to change.
+     */
+    getImporterStudyUsingGET(parameters: {
+        'studyId': string,
+        $queryParameters ? : any,
+        $domain ? : string
+    }): Promise < ResponseEntityImportStudy > {
+        return this.getImporterStudyUsingGETWithHttpInfo(parameters).then(function(response: request.Response) {
+            return response.body;
+        });
+    };
+    runTrialImportUsingGETURL(parameters: {
+        'studyId': string,
+        $queryParameters ? : any
+    }): string {
+        let queryParameters: any = {};
+        let path = '/api/importer/{studyId}/import';
+
+        path = path.replace('{studyId}', parameters['studyId'] + '');
+
+        if (parameters.$queryParameters) {
+            Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
+                var parameter = parameters.$queryParameters[parameterName];
+                queryParameters[parameterName] = parameter;
+            });
+        }
+        let keys = Object.keys(queryParameters);
+        return this.domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
+    };
+
+    /**
+     * Run a trial import of the studyId
+     * @method
+     * @name CBioPortalAPIInternal#runTrialImportUsingGET
+     * @param {string} studyId - A web service for supplying JSON formatted data to cBioPortal clients. Please note that this API is currently in beta and subject to change.
+     */
+    runTrialImportUsingGETWithHttpInfo(parameters: {
+        'studyId': string,
+        $queryParameters ? : any,
+        $domain ? : string
+    }): Promise < request.Response > {
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
+        const errorHandlers = this.errorHandlers;
+        const request = this.request;
+        let path = '/api/importer/{studyId}/import';
+        let body: any;
+        let queryParameters: any = {};
+        let headers: any = {};
+        let form: any = {};
+        return new Promise(function(resolve, reject) {
+            headers['Accept'] = 'application/json';
+
+            path = path.replace('{studyId}', parameters['studyId'] + '');
+
+            if (parameters['studyId'] === undefined) {
+                reject(new Error('Missing required  parameter: studyId'));
+                return;
+            }
+
+            if (parameters.$queryParameters) {
+                Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
+                    var parameter = parameters.$queryParameters[parameterName];
+                    queryParameters[parameterName] = parameter;
+                });
+            }
+
+            request('GET', domain + path, body, headers, queryParameters, form, reject, resolve, errorHandlers);
+
+        });
+    };
+
+    /**
+     * Run a trial import of the studyId
+     * @method
+     * @name CBioPortalAPIInternal#runTrialImportUsingGET
+     * @param {string} studyId - A web service for supplying JSON formatted data to cBioPortal clients. Please note that this API is currently in beta and subject to change.
+     */
+    runTrialImportUsingGET(parameters: {
+        'studyId': string,
+        $queryParameters ? : any,
+        $domain ? : string
+    }): Promise < ResponseEntityString > {
+        return this.runTrialImportUsingGETWithHttpInfo(parameters).then(function(response: request.Response) {
+            return response.body;
+        });
+    };
+    runTrialValidationUsingGETURL(parameters: {
+        'studyId': string,
+        $queryParameters ? : any
+    }): string {
+        let queryParameters: any = {};
+        let path = '/api/importer/{studyId}/validate';
+
+        path = path.replace('{studyId}', parameters['studyId'] + '');
+
+        if (parameters.$queryParameters) {
+            Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
+                var parameter = parameters.$queryParameters[parameterName];
+                queryParameters[parameterName] = parameter;
+            });
+        }
+        let keys = Object.keys(queryParameters);
+        return this.domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
+    };
+
+    /**
+     * Run a trial validation of the studyId
+     * @method
+     * @name CBioPortalAPIInternal#runTrialValidationUsingGET
+     * @param {string} studyId - A web service for supplying JSON formatted data to cBioPortal clients. Please note that this API is currently in beta and subject to change.
+     */
+    runTrialValidationUsingGETWithHttpInfo(parameters: {
+        'studyId': string,
+        $queryParameters ? : any,
+        $domain ? : string
+    }): Promise < request.Response > {
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
+        const errorHandlers = this.errorHandlers;
+        const request = this.request;
+        let path = '/api/importer/{studyId}/validate';
+        let body: any;
+        let queryParameters: any = {};
+        let headers: any = {};
+        let form: any = {};
+        return new Promise(function(resolve, reject) {
+            headers['Accept'] = 'application/json';
+
+            path = path.replace('{studyId}', parameters['studyId'] + '');
+
+            if (parameters['studyId'] === undefined) {
+                reject(new Error('Missing required  parameter: studyId'));
+                return;
+            }
+
+            if (parameters.$queryParameters) {
+                Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
+                    var parameter = parameters.$queryParameters[parameterName];
+                    queryParameters[parameterName] = parameter;
+                });
+            }
+
+            request('GET', domain + path, body, headers, queryParameters, form, reject, resolve, errorHandlers);
+
+        });
+    };
+
+    /**
+     * Run a trial validation of the studyId
+     * @method
+     * @name CBioPortalAPIInternal#runTrialValidationUsingGET
+     * @param {string} studyId - A web service for supplying JSON formatted data to cBioPortal clients. Please note that this API is currently in beta and subject to change.
+     */
+    runTrialValidationUsingGET(parameters: {
+        'studyId': string,
+        $queryParameters ? : any,
+        $domain ? : string
+    }): Promise < ResponseEntityString > {
+        return this.runTrialValidationUsingGETWithHttpInfo(parameters).then(function(response: request.Response) {
+            return response.body;
+        });
+    };
+    getAllLogsForStudyUsingGETURL(parameters: {
+        'logType': string,
+        'studyId': string,
+        $queryParameters ? : any
+    }): string {
+        let queryParameters: any = {};
+        let path = '/api/logs/{logType}/{studyId}';
+
+        path = path.replace('{logType}', parameters['logType'] + '');
+
+        path = path.replace('{studyId}', parameters['studyId'] + '');
+
+        if (parameters.$queryParameters) {
+            Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
+                var parameter = parameters.$queryParameters[parameterName];
+                queryParameters[parameterName] = parameter;
+            });
+        }
+        let keys = Object.keys(queryParameters);
+        return this.domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
+    };
+
+    /**
+     * Get the specified log file
+     * @method
+     * @name CBioPortalAPIInternal#getAllLogsForStudyUsingGET
+     * @param {string} logType - A web service for supplying JSON formatted data to cBioPortal clients. Please note that this API is currently in beta and subject to change.
+     * @param {string} studyId - A web service for supplying JSON formatted data to cBioPortal clients. Please note that this API is currently in beta and subject to change.
+     */
+    getAllLogsForStudyUsingGETWithHttpInfo(parameters: {
+        'logType': string,
+        'studyId': string,
+        $queryParameters ? : any,
+        $domain ? : string
+    }): Promise < request.Response > {
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
+        const errorHandlers = this.errorHandlers;
+        const request = this.request;
+        let path = '/api/logs/{logType}/{studyId}';
+        let body: any;
+        let queryParameters: any = {};
+        let headers: any = {};
+        let form: any = {};
+        return new Promise(function(resolve, reject) {
+            headers['Accept'] = 'application/json';
+
+            path = path.replace('{logType}', parameters['logType'] + '');
+
+            if (parameters['logType'] === undefined) {
+                reject(new Error('Missing required  parameter: logType'));
+                return;
+            }
+
+            path = path.replace('{studyId}', parameters['studyId'] + '');
+
+            if (parameters['studyId'] === undefined) {
+                reject(new Error('Missing required  parameter: studyId'));
+                return;
+            }
+
+            if (parameters.$queryParameters) {
+                Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
+                    var parameter = parameters.$queryParameters[parameterName];
+                    queryParameters[parameterName] = parameter;
+                });
+            }
+
+            request('GET', domain + path, body, headers, queryParameters, form, reject, resolve, errorHandlers);
+
+        });
+    };
+
+    /**
+     * Get the specified log file
+     * @method
+     * @name CBioPortalAPIInternal#getAllLogsForStudyUsingGET
+     * @param {string} logType - A web service for supplying JSON formatted data to cBioPortal clients. Please note that this API is currently in beta and subject to change.
+     * @param {string} studyId - A web service for supplying JSON formatted data to cBioPortal clients. Please note that this API is currently in beta and subject to change.
+     */
+    getAllLogsForStudyUsingGET(parameters: {
+        'logType': string,
+        'studyId': string,
+        $queryParameters ? : any,
+        $domain ? : string
+    }): Promise < ResponseEntityListImportLog > {
+        return this.getAllLogsForStudyUsingGETWithHttpInfo(parameters).then(function(response: request.Response) {
+            return response.body;
+        });
+    };
+    getLogUsingGETURL(parameters: {
+        'logType': string,
+        'studyId': string,
+        'id': string,
+        $queryParameters ? : any
+    }): string {
+        let queryParameters: any = {};
+        let path = '/api/logs/{logType}/{studyId}/{id}';
+
+        path = path.replace('{logType}', parameters['logType'] + '');
+
+        path = path.replace('{studyId}', parameters['studyId'] + '');
+
+        path = path.replace('{id}', parameters['id'] + '');
+
+        if (parameters.$queryParameters) {
+            Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
+                var parameter = parameters.$queryParameters[parameterName];
+                queryParameters[parameterName] = parameter;
+            });
+        }
+        let keys = Object.keys(queryParameters);
+        return this.domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
+    };
+
+    /**
+     * Get the specified log file
+     * @method
+     * @name CBioPortalAPIInternal#getLogUsingGET
+     * @param {string} logType - A web service for supplying JSON formatted data to cBioPortal clients. Please note that this API is currently in beta and subject to change.
+     * @param {string} studyId - A web service for supplying JSON formatted data to cBioPortal clients. Please note that this API is currently in beta and subject to change.
+     * @param {string} id - A web service for supplying JSON formatted data to cBioPortal clients. Please note that this API is currently in beta and subject to change.
+     */
+    getLogUsingGETWithHttpInfo(parameters: {
+        'logType': string,
+        'studyId': string,
+        'id': string,
+        $queryParameters ? : any,
+        $domain ? : string
+    }): Promise < request.Response > {
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
+        const errorHandlers = this.errorHandlers;
+        const request = this.request;
+        let path = '/api/logs/{logType}/{studyId}/{id}';
+        let body: any;
+        let queryParameters: any = {};
+        let headers: any = {};
+        let form: any = {};
+        return new Promise(function(resolve, reject) {
+            headers['Accept'] = 'application/json';
+
+            path = path.replace('{logType}', parameters['logType'] + '');
+
+            if (parameters['logType'] === undefined) {
+                reject(new Error('Missing required  parameter: logType'));
+                return;
+            }
+
+            path = path.replace('{studyId}', parameters['studyId'] + '');
+
+            if (parameters['studyId'] === undefined) {
+                reject(new Error('Missing required  parameter: studyId'));
+                return;
+            }
+
+            path = path.replace('{id}', parameters['id'] + '');
+
+            if (parameters['id'] === undefined) {
+                reject(new Error('Missing required  parameter: id'));
+                return;
+            }
+
+            if (parameters.$queryParameters) {
+                Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
+                    var parameter = parameters.$queryParameters[parameterName];
+                    queryParameters[parameterName] = parameter;
+                });
+            }
+
+            request('GET', domain + path, body, headers, queryParameters, form, reject, resolve, errorHandlers);
+
+        });
+    };
+
+    /**
+     * Get the specified log file
+     * @method
+     * @name CBioPortalAPIInternal#getLogUsingGET
+     * @param {string} logType - A web service for supplying JSON formatted data to cBioPortal clients. Please note that this API is currently in beta and subject to change.
+     * @param {string} studyId - A web service for supplying JSON formatted data to cBioPortal clients. Please note that this API is currently in beta and subject to change.
+     * @param {string} id - A web service for supplying JSON formatted data to cBioPortal clients. Please note that this API is currently in beta and subject to change.
+     */
+    getLogUsingGET(parameters: {
+        'logType': string,
+        'studyId': string,
+        'id': string,
+        $queryParameters ? : any,
+        $domain ? : string
+    }): Promise < ImportLog > {
+        return this.getLogUsingGETWithHttpInfo(parameters).then(function(response: request.Response) {
+            return response.body;
+        });
+    };
     fetchMolecularProfileSampleCountsUsingPOSTURL(parameters: {
         'studyViewFilter' ? : StudyViewFilter,
         $queryParameters ? : any
