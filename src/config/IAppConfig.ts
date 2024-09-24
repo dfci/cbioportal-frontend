@@ -187,7 +187,7 @@ export interface IServerConfig {
     vaf_log_scale_default: boolean; // this has a default
     skin_study_view_show_sv_table: boolean; // this has a default
     enable_study_tags: boolean;
-    show_profile_download: boolean;
+    skin_show_profile_download_tab: boolean;
     clickhouse_mode: boolean;
     download_custom_buttons_json: string;
 }
