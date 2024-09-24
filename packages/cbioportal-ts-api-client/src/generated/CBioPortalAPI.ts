@@ -135,6 +135,33 @@ export type ClinicalDataSingleStudyFilter = {
         'ids': Array < string >
 
 };
+export type ContentDisposition = {
+    'attachment': boolean
+
+        'charset': {
+        'registered': boolean
+
+    }
+
+        'creationDate': string
+
+        'filename': string
+
+        'formData': boolean
+
+        'inline': boolean
+
+        'modificationDate': string
+
+        'name': string
+
+        'readDate': string
+
+        'size': number
+
+        'type': string
+
+};
 export type CopyNumberSeg = {
     'chromosome': string
 
@@ -299,6 +326,22 @@ export type GenericAssayMetaFilter = {
         'molecularProfileIds': Array < string >
 
 };
+export type HttpMethod = {};
+export type HttpRange = {};
+export type HttpStatusCode = {
+    'error': boolean
+
+        'is1xxInformational': boolean
+
+        'is2xxSuccessful': boolean
+
+        'is3xxRedirection': boolean
+
+        'is4xxClientError': boolean
+
+        'is5xxServerError': boolean
+
+};
 export type Info = {
     'dbVersion': string
 
@@ -323,6 +366,29 @@ export type Info = {
         'gitDirty': boolean
 
         'portalVersion': string
+
+};
+export type MediaType = {
+    'parameters': {}
+
+    'charset': {
+        'registered': boolean
+
+    }
+
+    'concrete': boolean
+
+        'qualityValue': number
+
+        'subtype': string
+
+        'subtypeSuffix': string
+
+        'type': string
+
+        'wildcardSubtype': boolean
+
+        'wildcardType': boolean
 
 };
 export type MolecularDataFilter = {
@@ -505,6 +571,201 @@ export type PatientIdentifier = {
         'studyId': string
 
 };
+export type ResponseEntityListStudyOverlap = {
+    'body': Array < StudyOverlap >
+
+        'headers': {
+            'host': {
+                'address': {
+                    'address': Array < string >
+
+                        'anyLocalAddress': boolean
+
+                        'canonicalHostName': string
+
+                        'hostAddress': string
+
+                        'hostName': string
+
+                        'linkLocalAddress': boolean
+
+                        'loopbackAddress': boolean
+
+                        'mcglobal': boolean
+
+                        'mclinkLocal': boolean
+
+                        'mcnodeLocal': boolean
+
+                        'mcorgLocal': boolean
+
+                        'mcsiteLocal': boolean
+
+                        'multicastAddress': boolean
+
+                        'siteLocalAddress': boolean
+
+                }
+
+                'hostName': string
+
+                    'hostString': string
+
+                    'port': number
+
+                    'unresolved': boolean
+
+            }
+
+            'accept': Array < MediaType >
+
+                'acceptCharset': Array < {
+                    'registered': boolean
+
+                } >
+
+                'acceptLanguage': Array < {
+                    'range': string
+
+                        'weight': number
+
+                } >
+
+                'acceptLanguageAsLocales': Array < {
+                    'country': string
+
+                        'displayCountry': string
+
+                        'displayLanguage': string
+
+                        'displayName': string
+
+                        'displayScript': string
+
+                        'displayVariant': string
+
+                        'extensionKeys': Array < string >
+
+                        'iso3Country': string
+
+                        'iso3Language': string
+
+                        'language': string
+
+                        'script': string
+
+                        'unicodeLocaleAttributes': Array < string >
+
+                        'unicodeLocaleKeys': Array < string >
+
+                        'variant': string
+
+                } >
+
+                'acceptPatch': Array < MediaType >
+
+                'accessControlAllowCredentials': boolean
+
+                'accessControlAllowHeaders': Array < string >
+
+                'accessControlAllowMethods': Array < HttpMethod >
+
+                'accessControlAllowOrigin': string
+
+                'accessControlExposeHeaders': Array < string >
+
+                'accessControlMaxAge': number
+
+                'accessControlRequestHeaders': Array < string >
+
+                'accessControlRequestMethod': HttpMethod
+
+                'all': {}
+
+                'allow': Array < HttpMethod >
+
+                'basicAuth': string
+
+                'bearerAuth': string
+
+                'cacheControl': string
+
+                'connection': Array < string >
+
+                'contentDisposition': ContentDisposition
+
+                'contentLanguage': {
+                'country': string
+
+                    'displayCountry': string
+
+                    'displayLanguage': string
+
+                    'displayName': string
+
+                    'displayScript': string
+
+                    'displayVariant': string
+
+                    'extensionKeys': Array < string >
+
+                    'iso3Country': string
+
+                    'iso3Language': string
+
+                    'language': string
+
+                    'script': string
+
+                    'unicodeLocaleAttributes': Array < string >
+
+                    'unicodeLocaleKeys': Array < string >
+
+                    'variant': string
+
+            }
+
+                'contentLength': number
+
+                'contentType': MediaType
+
+                'date': number
+
+                'empty': boolean
+
+                'etag': string
+
+                'expires': number
+
+                'ifMatch': Array < string >
+
+                'ifModifiedSince': number
+
+                'ifNoneMatch': Array < string >
+
+                'ifUnmodifiedSince': number
+
+                'lastModified': number
+
+                'location': string
+
+                'origin': string
+
+                'pragma': string
+
+                'range': Array < HttpRange >
+
+                'upgrade': string
+
+                'vary': Array < string >
+
+        }
+
+        'statusCode': HttpStatusCode
+
+        'statusCodeValue': number
+
+};
 export type Sample = {
     'copyNumberSegmentPresent': boolean
 
@@ -561,6 +822,14 @@ export type SampleMolecularIdentifier = {
 };
 export type ServerStatusMessage = {
     'status': string
+
+};
+export type StudyOverlap = {
+    'overlappingStudyIds': Array < string >
+
+        'overlappingStudyNames': Array < string >
+
+        'studyId': string
 
 };
 export type TypeOfCancer = {
@@ -5100,6 +5369,67 @@ export default class CBioPortalAPI {
                 return response.body;
             });
         };
+    getStudiesWithOverlappingSamplesUsingGETURL(parameters: {
+        $queryParameters ? : any
+    }): string {
+        let queryParameters: any = {};
+        let path = '/api/studies/overlapping_studies';
+
+        if (parameters.$queryParameters) {
+            Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
+                var parameter = parameters.$queryParameters[parameterName];
+                queryParameters[parameterName] = parameter;
+            });
+        }
+        let keys = Object.keys(queryParameters);
+        return this.domain + path + (keys.length > 0 ? '?' + (keys.map(key => key + '=' + encodeURIComponent(queryParameters[key])).join('&')) : '');
+    };
+
+    /**
+     * Get the study tags by IDs
+     * @method
+     * @name CBioPortalAPI#getStudiesWithOverlappingSamplesUsingGET
+     */
+    getStudiesWithOverlappingSamplesUsingGETWithHttpInfo(parameters: {
+        $queryParameters ? : any,
+            $domain ? : string
+    }): Promise < request.Response > {
+        const domain = parameters.$domain ? parameters.$domain : this.domain;
+        const errorHandlers = this.errorHandlers;
+        const request = this.request;
+        let path = '/api/studies/overlapping_studies';
+        let body: any;
+        let queryParameters: any = {};
+        let headers: any = {};
+        let form: any = {};
+        return new Promise(function(resolve, reject) {
+            headers['Accept'] = 'application/json';
+
+            if (parameters.$queryParameters) {
+                Object.keys(parameters.$queryParameters).forEach(function(parameterName) {
+                    var parameter = parameters.$queryParameters[parameterName];
+                    queryParameters[parameterName] = parameter;
+                });
+            }
+
+            request('GET', domain + path, body, headers, queryParameters, form, reject, resolve, errorHandlers);
+
+        });
+    };
+
+    /**
+     * Get the study tags by IDs
+     * @method
+     * @name CBioPortalAPI#getStudiesWithOverlappingSamplesUsingGET
+     */
+    getStudiesWithOverlappingSamplesUsingGET(parameters: {
+        $queryParameters ? : any,
+            $domain ? : string
+    }): Promise < ResponseEntityListStudyOverlap > {
+        return this.getStudiesWithOverlappingSamplesUsingGETWithHttpInfo(parameters).then(function(response: request.Response) {
+            return response.body;
+        });
+    };
     getTagsForMultipleStudiesUsingPOSTURL(parameters: {
         'studyIds': Array < string > ,
         $queryParameters ? : any
