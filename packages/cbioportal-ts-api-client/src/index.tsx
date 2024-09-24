@@ -92,5 +92,7 @@ export {
     MutationDataFilter,
     GenericAssayDataFilter,
     AlterationFilter,
+    ImportLog,
+    ImportStudy,
     default as CBioPortalAPIInternal,
 } from './generated/CBioPortalAPIInternal';
