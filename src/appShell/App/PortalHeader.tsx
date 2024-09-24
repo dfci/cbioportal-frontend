@@ -98,7 +98,8 @@ export default class PortalHeader extends React.Component<
                 text: 'Download Profile Data',
                 address: '/DownloadProfileData',
                 internal: false,
-                hide: () => getServerConfig().show_profile_download === false,
+                hide: () =>
+                    getServerConfig().skin_show_profile_download_tab === false,
             },
 
             {
@@ -141,6 +142,10 @@ export default class PortalHeader extends React.Component<
     }
 
     render() {
+        console.log('hit');
+        console.log(getServerConfig().skin_show_data_tab);
+        console.log('hit');
+
         return (
             <header>
                 <div id="leftHeaderContent">

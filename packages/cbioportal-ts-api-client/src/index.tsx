@@ -92,6 +92,8 @@ export {
     MutationDataFilter,
     GenericAssayDataFilter,
     AlterationFilter,
+    ImportLog,
+    ImportStudy,
     SampleTreatmentReport,
     PatientTreatmentReport,
     PatientTreatment,
