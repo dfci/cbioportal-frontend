@@ -104,6 +104,12 @@ const WebAPIPage = SuspenseWrapper(
     React.lazy(() => import('./pages/staticPages/webAPI/WebAPIPage'))
 );
 
+const DownloadProfileData = SuspenseWrapper(
+    React.lazy(() =>
+        import('./pages/staticPages/downloadProfileData/DownloadProfileData')
+    )
+);
+
 import $ from 'jquery';
 import { getBrowserWindow } from 'cbioportal-frontend-commons';
 import { seekUrlHash } from 'shared/lib/seekUrlHash';
@@ -421,6 +427,10 @@ export const makeRoutes = () => {
                 <Route
                     path="/logs/:logType/:studyId/:logId"
                     component={LogDisplay}
+                />
+                <Route
+                    path="/downloadProfileData"
+                    component={DownloadProfileData}
                 />
                 <Route
                     path="/comparison/:tab?"
