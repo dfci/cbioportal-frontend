@@ -106,8 +106,8 @@ const WebAPIPage = SuspenseWrapper(
 
 const DownloadProfileData = SuspenseWrapper(
     // @ts-ignore
-    React.lazy(() =>
-        import('./pages/staticPages/downloadProfileData/DownloadProfileData')
+    // prettier-ignore
+    React.lazy(() => import('./pages/staticPages/downloadProfileData/DownloadProfileData')
     )
 );
 
