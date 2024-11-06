@@ -126,10 +126,6 @@ export default class PortalHeader extends React.Component<
     }
 
     render() {
-        console.log('hit');
-        console.log(getServerConfig().skin_show_data_tab);
-        console.log('hit');
-
         return (
             <header>
                 <div id="leftHeaderContent">
