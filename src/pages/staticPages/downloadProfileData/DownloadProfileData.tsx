@@ -173,7 +173,7 @@ export default class DownloadProfileData extends React.Component<{}, State> {
                         }}
                     >
                         This is required by the Profile Project, DFCI IRB
-                        protocol 11-104, 17-000, 20-000.
+                        protocols 11-104, 17-000, and 20-000.
                     </p>
                     <input
                         type="radio"
