@@ -55,7 +55,11 @@ import {
     deriveStructuralVariantType,
     generateQueryStructuralVariantId,
 } from 'oncokb-frontend-commons';
-import { VariantAnnotation } from 'genome-nexus-ts-api-client';
+import {
+    VariantAnnotation,
+    GenomeNexusAPI,
+    GenomeNexusAPIInternal,
+} from 'genome-nexus-ts-api-client';
 import { IndicatorQueryResp } from 'oncokb-ts-api-client';
 import GenomeNexusCache from 'shared/cache/GenomeNexusCache';
 import GenomeNexusMutationAssessorCache from 'shared/cache/GenomeNexusMutationAssessorCache';
@@ -444,7 +448,9 @@ export class ResultsViewPageStore extends AnalysisStore
 
     constructor(
         protected appStore: AppStore,
-        public urlWrapper: ResultsViewURLWrapper
+        public urlWrapper: ResultsViewURLWrapper,
+        protected importedGenomenexusClient?: GenomeNexusAPI,
+        protected importedGenomenexusInternalClient?: GenomeNexusAPIInternal
     ) {
         super();
         makeObservable(this);
@@ -3837,8 +3843,8 @@ export class ResultsViewPageStore extends AnalysisStore
             this.clinicalDataGroupedBySampleMap,
             this.mutationsTabClinicalAttributes,
             this.clinicalAttributeIdToAvailableFrequency,
-            this.genomeNexusClient,
-            this.genomeNexusInternalClient,
+            this.importedGenomenexusClient,
+            this.importedGenomenexusInternalClient,
             () => this.urlWrapper.query.mutations_transcript_id
         );
         this.mutationMapperStoreByGeneWithDriverKey[
