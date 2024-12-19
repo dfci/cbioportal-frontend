@@ -105,50 +105,50 @@ export default class MutationMapperToolStore {
 
     @computed get genomeNexusClient() {
         let client = defaultGenomeNexusClient;
-        if (
-            this.mutationMapperStoreConfigOverride?.genomeBuild ===
-            REFERENCE_GENOME.grch38.UCSC
-        ) {
-            client = new GenomeNexusAPI(
-                getServerConfig().genomenexus_url_grch38!
-            );
-        }
+        // if (
+        //     this.mutationMapperStoreConfigOverride?.genomeBuild ===
+        //     REFERENCE_GENOME.grch38.UCSC
+        // ) {
+        //     client = new GenomeNexusAPI(
+        //         getServerConfig().genomenexus_url_grch38!
+        //     );
+        // }
 
-        client.addErrorHandler(err => {
-            eventBus.emit(
-                'error',
-                null,
-                new SiteError(
-                    new Error(ErrorMessages.GENOME_NEXUS_LOAD_ERROR),
-                    'alert'
-                )
-            );
-        });
+        // client.addErrorHandler(err => {
+        //     eventBus.emit(
+        //         'error',
+        //         null,
+        //         new SiteError(
+        //             new Error(ErrorMessages.GENOME_NEXUS_LOAD_ERROR),
+        //             'alert'
+        //         )
+        //     );
+        // });
 
         return client;
     }
 
     @computed get genomeNexusInternalClient() {
         let client = defaultGenomeNexusInternalClient;
-        if (
-            this.mutationMapperStoreConfigOverride?.genomeBuild ===
-            REFERENCE_GENOME.grch38.UCSC
-        ) {
-            client = new GenomeNexusAPIInternal(
-                getServerConfig().genomenexus_url_grch38!
-            );
-        }
+        // if (
+        //     this.mutationMapperStoreConfigOverride?.genomeBuild ===
+        //     REFERENCE_GENOME.grch38.UCSC
+        // ) {
+        //     client = new GenomeNexusAPIInternal(
+        //         getServerConfig().genomenexus_url_grch38!
+        //     );
+        // }
 
-        client.addErrorHandler(err => {
-            eventBus.emit(
-                'error',
-                null,
-                new SiteError(
-                    new Error(ErrorMessages.GENOME_NEXUS_LOAD_ERROR),
-                    'alert'
-                )
-            );
-        });
+        // client.addErrorHandler(err => {
+        //     eventBus.emit(
+        //         'error',
+        //         null,
+        //         new SiteError(
+        //             new Error(ErrorMessages.GENOME_NEXUS_LOAD_ERROR),
+        //             'alert'
+        //         )
+        //     );
+        // });
 
         return client;
     }
