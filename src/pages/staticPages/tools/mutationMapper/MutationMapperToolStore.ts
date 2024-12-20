@@ -104,7 +104,8 @@ export default class MutationMapperToolStore {
     }
 
     @computed get genomeNexusClient() {
-        let client = defaultGenomeNexusClient;
+        // let client = defaultGenomeNexusClient;
+        let client = new GenomeNexusAPI(this.mutationMapperStoreConfigOverride?.genomeBuild);
         // if (
         //     this.mutationMapperStoreConfigOverride?.genomeBuild ===
         //     REFERENCE_GENOME.grch38.UCSC
@@ -129,7 +130,8 @@ export default class MutationMapperToolStore {
     }
 
     @computed get genomeNexusInternalClient() {
-        let client = defaultGenomeNexusInternalClient;
+        // let client = defaultGenomeNexusInternalClient;
+        let client = new GenomeNexusAPIInternal(this.mutationMapperStoreConfigOverride?.genomeBuild);
         // if (
         //     this.mutationMapperStoreConfigOverride?.genomeBuild ===
         //     REFERENCE_GENOME.grch38.UCSC
