@@ -114,16 +114,16 @@ export default class MutationMapperToolStore {
         //     );
         // }
 
-        // client.addErrorHandler(err => {
-        //     eventBus.emit(
-        //         'error',
-        //         null,
-        //         new SiteError(
-        //             new Error(ErrorMessages.GENOME_NEXUS_LOAD_ERROR),
-        //             'alert'
-        //         )
-        //     );
-        // });
+        client.addErrorHandler(err => {
+            eventBus.emit(
+                'error',
+                null,
+                new SiteError(
+                    new Error(ErrorMessages.GENOME_NEXUS_LOAD_ERROR),
+                    'alert'
+                )
+            );
+        });
 
         return client;
     }
@@ -139,16 +139,16 @@ export default class MutationMapperToolStore {
         //     );
         // }
 
-        // client.addErrorHandler(err => {
-        //     eventBus.emit(
-        //         'error',
-        //         null,
-        //         new SiteError(
-        //             new Error(ErrorMessages.GENOME_NEXUS_LOAD_ERROR),
-        //             'alert'
-        //         )
-        //     );
-        // });
+        client.addErrorHandler(err => {
+            eventBus.emit(
+                'error',
+                null,
+                new SiteError(
+                    new Error(ErrorMessages.GENOME_NEXUS_LOAD_ERROR),
+                    'alert'
+                )
+            );
+        });
 
         return client;
     }
