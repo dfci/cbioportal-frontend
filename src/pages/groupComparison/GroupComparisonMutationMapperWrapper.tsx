@@ -48,9 +48,10 @@ export default class GroupComparisonMutationMapperWrapper extends React.Componen
     }
 
     @computed get mutationMapperToolStore() {
-        const genomeBuild = getGenomeBuildFromStudies(
-            this.props.store.studies.result
-        );
+        // const genomeBuild = getGenomeBuildFromStudies(
+        //     this.props.store.studies.result
+        // );
+        const genomeBuild = this.props.store.referenceGenomeBuild;
         const store = new MutationMapperToolStore(
             this.props.store.filteredAndAnnotatedMutations.result,
             {
