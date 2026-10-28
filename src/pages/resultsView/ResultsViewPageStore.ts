@@ -3219,6 +3219,17 @@ export class ResultsViewPageStore extends AnalysisStore
                     return Promise.resolve([]);
                 }
             },
+            // surfaces the 423 of a study left out of the study list while (re)importing
+            onResult: invalidStudyIds => {
+                if (invalidStudyIds && invalidStudyIds.length > 0) {
+                    getClient()
+                        .fetchStudiesUsingPOST({
+                            studyIds: invalidStudyIds,
+                            projection: REQUEST_ARG_ENUM.PROJECTION_SUMMARY,
+                        })
+                        .catch(() => {});
+                }
+            },
         },
         []
     );

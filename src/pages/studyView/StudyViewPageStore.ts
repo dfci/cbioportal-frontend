@@ -6763,7 +6763,20 @@ export class StudyViewPageStore
             _.each(this.filteredVirtualStudies.result, study =>
                 validIds.push(study.id)
             );
-            return _.filter(this.studyIds, id => !_.includes(validIds, id));
+            const unknownIds = _.filter(
+                this.studyIds,
+                id => !_.includes(validIds, id)
+            );
+            // surfaces the 423 of a study left out of the study list while (re)importing
+            if (unknownIds.length > 0) {
+                await getClient()
+                    .fetchStudiesUsingPOST({
+                        studyIds: unknownIds,
+                        projection: REQUEST_ARG_ENUM.PROJECTION_SUMMARY,
+                    })
+                    .catch(() => {});
+            }
+            return unknownIds;
         },
         onError: () => {},
         onResult: unknownIds => {
@@ -11118,6 +11131,9 @@ export class StudyViewPageStore
     >({
         await: () => [this.molecularProfiles],
         invoke: async () => {
+            if (this.queriedPhysicalStudyIds.result.length === 0) {
+                return [];
+            }
             const [counts, selectedSamples] = await Promise.all([
                 this.internalClient.fetchMolecularProfileSampleCountsUsingPOST({
                     studyViewFilter: this.filters,
@@ -12039,6 +12055,9 @@ export class StudyViewPageStore
     public readonly shouldDisplayClinicalEventTypeCounts = remoteData({
         await: () => [this.queriedPhysicalStudyIds],
         invoke: async () => {
+            if (this.queriedPhysicalStudyIds.result.length === 0) {
+                return false;
+            }
             const filters: Partial<StudyViewFilter> = {};
             filters.studyIds = this.queriedPhysicalStudyIds.result;
             return Promise.resolve(
@@ -12428,6 +12447,9 @@ export class StudyViewPageStore
     public readonly shouldDisplayPatientTreatments = remoteData({
         await: () => [this.queriedPhysicalStudyIds],
         invoke: () => {
+            if (this.queriedPhysicalStudyIds.result.length === 0) {
+                return Promise.resolve(false);
+            }
             return this.internalClient.getContainsTreatmentDataUsingPOST({
                 studyIds: toJS(this.queriedPhysicalStudyIds.result),
             });
@@ -12437,6 +12459,9 @@ export class StudyViewPageStore
     public readonly shouldDisplaySampleTreatments = remoteData({
         await: () => [this.queriedPhysicalStudyIds],
         invoke: () => {
+            if (this.queriedPhysicalStudyIds.result.length === 0) {
+                return Promise.resolve(false);
+            }
             return this.internalClient.getContainsSampleTreatmentDataUsingPOST({
                 studyIds: toJS(this.queriedPhysicalStudyIds.result),
             });
